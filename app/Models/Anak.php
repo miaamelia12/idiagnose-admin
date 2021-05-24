@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Anak extends Model
+{
+    use HasFactory;
+    protected $table = "anak";
+    protected $fillable = ['nama', 'usia', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan'];
+
+
+    public function diagnosa()
+    {
+        return $this->belongsToMany(Diagnosa::class, 'diagnosa_anak', 'anak_id', 'diagnosa_id')->withTimestamps();
+    }
+}
