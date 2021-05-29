@@ -19,8 +19,8 @@
             <h3>Data Anak</h3>
         </div>
         <div class="title_right">
-            <div class="col-md-5 col-sm-5   form-group row pull-right top_search">
-                <a href="{{route('anak.create')}}"><button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data</button></a>
+            <div class="col-md-4 form-group row pull-right top_search">
+                <a href="{{route('anak.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
             </div>
         </div>
     </div>
@@ -34,7 +34,6 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
-                                @if (!empty($datas))
                                 <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
@@ -61,18 +60,13 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="{{route('anak.show', $data->id)}}">Detail</a>
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Hapus</a>
+                                                        <a class="dropdown-item" href="{{route('anak.edit', $data->id)}}">Edit</a>
+                                                        <a class="dropdown-item" href="{{route('hapusanak', $data->id)}}">Hapus</a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                         @endforeach
-                                        @else
-                                        <tr>
-                                            Tidak ada data anak
-                                        </tr>
-                                        @endif
                                     </tbody>
                                 </table>
 

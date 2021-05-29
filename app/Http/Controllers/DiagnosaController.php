@@ -7,14 +7,30 @@ use Illuminate\Http\Request;
 
 class DiagnosaController extends Controller
 {
+    public function index()
+    {
+        $datas = Diagnosa::all();
+        return view('diagnosa.index', compact('datas'));
+    }
+
+    public function create()
+    {
+        return view('diagnosa.create');
+    }
+
     public function store(Request $request)
     {
-        $diagnosa = new Diagnosa();
+        $input = $request->all();
+        Diagnosa::create($input);
 
-        $diagnosa->nama_diagnosa = $request->input('nama_diagnosa');
+        return redirect()->route('diagnosa.index');
+    }
 
-        $diagnosa->save();
+    public function edit($id)
+    {
+        $datas = Diagnosa::findOrFail($id);
+        $diagnosa = Diagnosa::all();
 
-        return redirect('anak.create')->with('success', 'Data tersimpan');
+        return view('diagnosa.edit', compact('datas', 'diagnosa'));
     }
 }

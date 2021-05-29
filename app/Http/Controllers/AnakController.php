@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Anak;
 use App\Models\Diagnosa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnakController extends Controller
 {
     public function index()
     {
-        $datas = Anak::get();
+        $datas = Anak::all();
         return view('anak.index', compact('datas'));
     }
 
@@ -22,7 +23,7 @@ class AnakController extends Controller
 
     public function create()
     {
-        $diagnosa = Diagnosa::get();
+        $diagnosa = Diagnosa::all();
         return view('anak.create', compact('diagnosa'));
     }
 
@@ -30,18 +31,33 @@ class AnakController extends Controller
     {
         $input = $request->all();
 
-        // $this->validate($request, [
-        //     'nama' => 'required|string',
-        //     'usia' => 'required|numeric',
-        //     'tgl_lahir' => 'required|date',
-        //     'tgl_masuk_ysi' => 'required|date',
-        //     'jk' => 'required',
-        //     'kesehatan' => 'required|string',
-        // ]);
-
         $anak = Anak::create($input);
         $anak->diagnosa()->attach($request->input('diagnosa'));
 
+        return redirect()->route('anak.index');
+    }
+
+    public function edit($id)
+    {
+        $datas = Anak::findOrFail($id);
+        $diagnosa = Diagnosa::all();
+
+        return view('anak.edit', compact('datas', 'diagnosa'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $anak = Anak::findOrFail($id);
+        $input = $request->all();
+        $anak->update($request->all());
+        $anak->diagnosa()->sync($request->input('diagnosa'));
+
+        return redirect()->route('anak.index');
+    }
+
+    public function hapus($id)
+    {
+        Anak::findOrFail($id)->delete();
         return redirect()->route('anak.index');
     }
 }

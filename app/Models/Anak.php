@@ -12,6 +12,11 @@ class Anak extends Model
     protected $fillable = ['nama', 'usia', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan'];
 
 
+    public function getNamaAnakAtrribute($nama)
+    {
+        return ucfirst(strtolower($nama));
+    }
+
     public function diagnosa()
     {
         return $this->belongsToMany(Diagnosa::class, 'diagnosa_anak', 'anak_id', 'diagnosa_id')->withTimestamps();

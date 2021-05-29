@@ -22,13 +22,16 @@
 
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
+            <div class="menu_section {{ setShow(['anak*']) }}">
                 <ul class="nav side-menu">
                     <li class="nav-item">
                         <a href="{{route('dashboard.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('anak.index')}}" class="nav-link {{ setActive(['anak*']) }}"><i class="fa fa-edit"></i> Data Anak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('diagnosa.index')}}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}"><i class="fa fa-edit"></i> Daftar Diagnosa</a>
                     </li>
                     <li><a><i class="fa fa-desktop"></i> Pertumbuhan <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
