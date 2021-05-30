@@ -16,7 +16,7 @@
 
     <div class="clearfix"></div>
 
-    <form method="POST" id="validate_form" action="{{route('anak.update', $datas->id)}}" enctype="multipart/form-data">
+    <form method="POST" id="validate_form" action="{{route('diagnosa.update', $datas->id)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{ method_field('put') }}
         <div class="row">
@@ -37,12 +37,25 @@
                                     <input name="nama_diagnosa" type="text" id="nama_diagnosa" required="required" class="form-control" value="{{ $datas->nama_diagnosa }}" autofocus>
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_lain">Nama Lain
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="nama_lain" type="text" id="nama_lain" class="form-control" value="{{ $datas->nama_lain }}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="deskripsi">Deskripsi <span class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="deskripsi" id="deskripsi" required="required" autofocus><?php echo $datas['deskripsi'] ?></textarea>
+                                </div>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
                                     <a href="{{route('diagnosa.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success">Update</button>
                                 </div>
                             </div>
                         </form>

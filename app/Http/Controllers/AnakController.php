@@ -48,7 +48,7 @@ class AnakController extends Controller
     public function update(Request $request, $id)
     {
         $anak = Anak::findOrFail($id);
-        $input = $request->all();
+        $request->all();
         $anak->update($request->all());
         $anak->diagnosa()->sync($request->input('diagnosa'));
 

@@ -26,5 +26,6 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('anak', AnakController::class);
 Route::get('hapusanak/{id}', [AnakController::class, 'hapus'])->name('hapusanak');
 Route::resource('diagnosa', DiagnosaController::class);
+Route::get('hapusdiagnosa/{id}', [DiagnosaController::class, 'hapus'])->name('hapusdiagnosa');
 Route::get('/hasilpemeriksaan', [PertumbuhanController::class, 'index']);
 Route::get('/daftarkonsultasi', [PerkembanganController::class, 'konsultasi']);

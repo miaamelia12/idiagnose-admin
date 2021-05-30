@@ -21,4 +21,8 @@ class Anak extends Model
     {
         return $this->belongsToMany(Diagnosa::class, 'diagnosa_anak', 'anak_id', 'diagnosa_id')->withTimestamps();
     }
-}
+
+    public function daftar_konsultan()
+    {
+        return $this->belongsToMany(DaftarKonsultasi::class, 'konsultasi_anak', 'anak_id', 'konsultasi_id')->withTimestamps();
+    }

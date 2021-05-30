@@ -29,8 +29,22 @@ class DiagnosaController extends Controller
     public function edit($id)
     {
         $datas = Diagnosa::findOrFail($id);
-        $diagnosa = Diagnosa::all();
 
-        return view('diagnosa.edit', compact('datas', 'diagnosa'));
+        return view('diagnosa.edit', compact('datas'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $diagnosa = Diagnosa::findOrFail($id);
+        $request->all();
+        $diagnosa->update($request->all());
+
+        return redirect()->route('diagnosa.index');
+    }
+
+    public function hapus($id)
+    {
+        Diagnosa::findOrFail($id)->delete();
+        return redirect()->route('diagnosa.index');
     }
 }
