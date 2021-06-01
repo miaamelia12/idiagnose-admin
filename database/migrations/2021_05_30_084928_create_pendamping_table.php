@@ -15,8 +15,9 @@ class CreatePendampingTable extends Migration
     {
         Schema::create('pendamping', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->string('nama_pendamping');
             $table->string('jabatan');
+            $table->string('profil')->nullable();
             $table->timestamps();
         });
     }

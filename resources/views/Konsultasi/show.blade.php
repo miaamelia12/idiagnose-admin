@@ -6,7 +6,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Detail Data Anak</h3>
+            <h3>Detail Konsultasi</h3>
         </div>
     </div>
 
@@ -18,62 +18,63 @@
                 <div class="x_content">
                     <br />
                     <table class="table table-stripped" width="100%">
-                        <!-- <tr>
-                            <td width="35%">Profil </td>
+                        <tr>
+                            <td width="35%">Nama Anak </td>
                             <td width="1%"> : </td>
                             <td>
-                                <img width="200" height="200" @if($datas->profil) src="{{ asset('images/anak/'.$datas->profil) }}" @endif />
+                                {{$datas->anak->nama}}
                             </td>
-                        </tr> -->
-                        <tr>
-                            <td width="35%">Nama Lengkap </td>
-                            <td width="1%"> : </td>
-                            <td>{{$datas->nama}}</td>
                         </tr>
                         <tr>
-                            <td width="35%">Usia</td>
+                            <td width="35%">Tanggal Konsultasi</td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->usia}}</td>
+                            <td>{{$datas->tgl_konsultasi}}</td>
                         </tr>
                         <tr>
-                            <td width="35%">Tanggal Lahir </td>
+                            <td width="35%">Problema </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->tgl_lahir}}</td>
+                            <td>{{$datas->problema}}</td>
                         </tr>
                         <tr>
-                            <td width="35%">Tanggal Masuk Yayasan Sayap Ibu </td>
-                            <td width="1%"> : </td>
-                            <td>{{$datas->tgl_masuk_ysi}}</td>
-                        </tr>
-                        <tr>
-                            <td width="35%">Jenis Kelamin </td>
-                            <td width="1%"> : </td>
-                            <td>{{$datas->jk}}</td>
-                        </tr>
-                        <tr>
-                            <td width="35%">Diagnosa </td>
+                            <td width="35%">Konsultan </td>
                             <td width="1%"> : </td>
                             <td>
-                                @foreach($datas->diagnosa as $item)
-                                <span>{{$item->nama_diagnosa}}</span>, <br />
+                                {{$datas->konsultan->nama_konsultan}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">Spesialis </td>
+                            <td width="1%"> : </td>
+                            <td>
+                                {{$datas->konsultan->spesialis}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">Rumah Sakit </td>
+                            <td width="1%"> : </td>
+                            <td>
+                                {{$datas->konsultan->rumah_sakit}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="35%">Pendamping </td>
+                            <td width="1%"> : </td>
+                            <td>
+                                @foreach($datas->pendamping as $item)
+                                <span>{{$item->nama_pendamping}}</span>, <br />
                                 @endforeach
                             </td>
                         </tr>
                         <tr>
-                            <td width="35%">Kesehatan </td>
+                            <td width="35%">Analisis Ahli </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->kesehatan}}</td>
-                        </tr>
-                        <tr>
-                            <td width="35%">Pendidikan </td>
-                            <td width="1%"> : </td>
-                            <td>{{$datas->pendidikan}}</td>
+                            <td>{{$datas->analisis_ahli}}</td>
                         </tr>
                     </table>
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" onclick="window.location='{{ route("anak.index")}}'" class="btn btn-secondary">Kembali</button>
+                            <button type="submit" onclick="window.location='{{ route("konsultasi.index")}}'" class="btn btn-secondary">Kembali</button>
                         </div>
                     </div>
                 </div>

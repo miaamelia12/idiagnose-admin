@@ -9,16 +9,16 @@ class DaftarKonsultasi extends Model
 {
     use HasFactory;
     protected $table = "daftar_konsultasi";
-    protected $fillable = ['tgl_konsultasi', 'problema', 'analisis_ahli'];
+    protected $fillable = ['tgl_konsultasi', 'problema', 'analisis_ahli', 'anak_id', 'konsultan_id'];
 
     public function anak()
     {
-        return $this->belongsToMany(Anak::class, 'konsultasi_anak', 'anak_id', 'konsultasi_id')->withTimestamps();
+        return $this->belongsTo(Anak::class, 'anak_id');
     }
 
     public function konsultan()
     {
-        return $this->belongsToMany(Konsultan::class, 'dokter_konsultan', 'konsultan_id', 'konsultasi_id')->withTimestamps();
+        return $this->belongsTo(Konsultan::class, 'konsultan_id');
     }
 
     public function pendamping()

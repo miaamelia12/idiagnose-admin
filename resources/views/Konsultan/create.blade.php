@@ -6,13 +6,13 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Tambah Data Diagnosa</h3>
+            <h3>Tambah Data Konsultan</h3>
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <form method="POST" id="validate_form" action="{{route('diagnosa.store')}}" enctype="multipart/form-data">
+    <form method="POST" id="validate_form" action="{{route('konsultan.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -26,30 +26,30 @@
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_diagnosa">Nama Diagnosa <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_konsultan">Nama Dokter <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_diagnosa" type="text" id="nama_diagnosa" required="required" class="form-control" autofocus>
+                                    <input name="nama_konsultan" type="text" id="nama_konsultan" required="required" class="form-control" autofocus>
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_lain">Nama Lain
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="spesialis">Spesialis <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_lain" type="text" id="nama_lain" class="form-control">
+                                    <input name="spesialis" type="text" id="spesialis" required="required" class="form-control" autofocus>
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="deskripsi">Deskripsi <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="rumah_sakit">Rumah Sakit <span class="required">*</span>
                                 </label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="deskripsi" id="deskripsi" required="required" autofocus></textarea>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="rumah_sakit" type="text" id="rumah_sakit" required="required" class="form-control" autofocus>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <a href="{{route('diagnosa.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
+                                    <a href="{{route('konsultan.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
                                     <button class="btn btn-primary" type="reset">Reset</button>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>

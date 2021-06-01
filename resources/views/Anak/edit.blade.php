@@ -109,6 +109,13 @@
                                     <input type="text" id="kesehatan" name="kesehatan" required="required" class="form-control" value="{{ $datas->kesehatan }}">
                                 </div>
                             </div>
+                            <!-- <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
+                                <div class="col-md-6">
+                                    <img width="200" height="200" @if($datas->profil) src="{{ asset('images/anak/'.$datas->profil) }}" @endif />
+                                    <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
+                                </div>
+                            </div> -->
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
@@ -148,6 +155,26 @@ array_push($diagnosa_ids, $diagnose->id);
         $('.diagnosa').val(data);
         $('.diagnosa').trigger('change');
     });
+
+    // function readURL() {
+    //     var input = this;
+    //     if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $(input).prev().attr('src', e.target.result);
+    //         }
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+    // }
+
+    // $(function() {
+    //     $(".uploads").change(readURL)
+    //     $("#f").submit(function() {
+    //         // do ajax submit or just classic form submit
+    //         //  alert("fake subminting")
+    //         return false
+    //     })
+    // })
 </script>
 @stop
 

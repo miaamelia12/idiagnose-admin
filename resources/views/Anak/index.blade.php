@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
-                                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                                <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
@@ -48,11 +48,36 @@
                                     <tbody>
                                         @foreach($datas as $data)
                                         <tr>
-                                            <td>{{$data->nama}}</td>
-                                            <td>{{$data->usia}}</td>
-                                            <td>{{$data->tgl_lahir}}</td>
-                                            <td>{{$data->tgl_masuk_ysi}}</td>
-                                            <td>{{$data->jk}}</td>
+                                            <td>
+                                                <!-- @if($data->profil)
+                                                <img src="{{url('images/anak/'. $data->profil)}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
+                                                @else
+                                                <img src="{{url('images/anak/default.png')}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
+                                                @endif
+                                                <div style="margin-top: 15px;"> -->
+                                                {{$data->nama}}
+                                                <!-- </div> -->
+                                            </td>
+                                            <td>
+                                                <!-- <div style="margin-top: 15px;"> -->
+                                                {{$data->usia}}
+                                                <!-- </div> -->
+                                            </td>
+                                            <td>
+                                                <!-- <div style="margin-top: 15px;"> -->
+                                                {{$data->tgl_lahir}}
+                                                <!-- </div> -->
+                                            </td>
+                                            <td>
+                                                <!-- <div style="margin-top: 15px;"> -->
+                                                {{$data->tgl_masuk_ysi}}
+                                                <!-- </div> -->
+                                            </td>
+                                            <td>
+                                                <!-- <div style="margin-top: 15px;"> -->
+                                                {{$data->jk}}
+                                                <!-- </div> -->
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

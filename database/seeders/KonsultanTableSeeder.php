@@ -16,21 +16,21 @@ class KonsultanTableSeeder extends Seeder
     {
         DB::table('konsultan')->insert([
             [
-                'nama' => "dr. Cipta",
+                'nama_konsultan' => "dr. Cipta",
                 'spesialis' => "Dokter Bedah",
                 'rumah_sakit' => "RSCM",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'nama' => "dr. Seruni",
+                'nama_konsultan' => "dr. Seruni",
                 'spesialis' => "Dokter Mata",
                 'rumah_sakit' => "RSCM",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'nama' => "dr. Reza",
+                'nama_konsultan' => "dr. Reza",
                 'spesialis' => "Dokter Mata",
                 'rumah_sakit' => "RS. Fatmawati",
                 'created_at' => \Carbon\Carbon::now(),

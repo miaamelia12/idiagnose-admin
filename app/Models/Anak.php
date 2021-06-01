@@ -9,12 +9,17 @@ class Anak extends Model
 {
     use HasFactory;
     protected $table = "anak";
-    protected $fillable = ['nama', 'usia', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan'];
+    protected $fillable = ['nama', 'usia', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan', 'profil'];
 
 
     public function getNamaAnakAtrribute($nama)
     {
-        return ucfirst(strtolower($nama));
+        return ucfirst($nama);
+    }
+
+    public function setNamaAttribute($nama)
+    {
+        $this->attributes['nama'] = strtolower($nama);
     }
 
     public function diagnosa()
@@ -22,7 +27,8 @@ class Anak extends Model
         return $this->belongsToMany(Diagnosa::class, 'diagnosa_anak', 'anak_id', 'diagnosa_id')->withTimestamps();
     }
 
-    public function daftar_konsultan()
+    public function daftar_konsultasi()
     {
-        return $this->belongsToMany(DaftarKonsultasi::class, 'konsultasi_anak', 'anak_id', 'konsultasi_id')->withTimestamps();
+        return $this->hasMany(DaftarKonsultasi::class, 'anak_id');
     }
+}

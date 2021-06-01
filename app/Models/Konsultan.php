@@ -9,10 +9,10 @@ class Konsultan extends Model
 {
     use HasFactory;
     protected $table = "konsultan";
-    protected $fillable = ['nama', 'spesialis', 'rumah_sakit'];
+    protected $fillable = ['nama_konsultan', 'spesialis', 'rumah_sakit'];
 
     public function daftar_konsultasi()
     {
-        return $this->belongsToMany(DaftarKonsultasi::class, 'dokter_konsultan', 'konsultan_id', 'konsultasi_id')->withTimestamps();
+        return $this->hasMany(DaftarKonsultasi::class, 'konsultan_id');
     }
 }

@@ -9,7 +9,7 @@ class Pendamping extends Model
 {
     use HasFactory;
     protected $table = "pendamping";
-    protected $fillable = ['nama', 'jabatan'];
+    protected $fillable = ['nama_pendamping', 'jabatan', 'profil'];
 
     public function daftar_konsultasi()
     {

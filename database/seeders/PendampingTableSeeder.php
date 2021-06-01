@@ -16,14 +16,14 @@ class PendampingTableSeeder extends Seeder
     {
         DB::table('pendamping')->insert([
             [
-                'nama' => "Sudarno",
+                'nama_pendamping' => "Sudarno",
                 'jabatan' => "Kepala Tumbuh Kembang Anak",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],
             [
-                'nama' => "Endang",
-                'spesialis' => "Perawat",
+                'nama_pendamping' => "Endang",
+                'jabatan' => "Perawat",
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ],

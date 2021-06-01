@@ -27,13 +27,30 @@
                     <li class="nav-item">
                         <a href="{{route('dashboard.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}"><i class="fa fa-home"></i> Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('anak.index')}}" class="nav-link {{ setActive(['anak*']) }}"><i class="fa fa-edit"></i> Data Anak</a>
+                    <li><a><i class="fa fa-clone"></i> Master Data <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="nav-item">
+                                <a href="{{route('anak.index')}}" class="nav-link {{ setActive(['anak*']) }}"> Data Anak</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('pendamping.index')}}" class="nav-link {{ setActive(['pendamping*']) }}"> Data Pendamping</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('konsultan.index')}}" class="nav-link {{ setActive(['konsultan*']) }}"> Data Konsultan</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('diagnosa.index')}}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}"><i class="fa fa-edit"></i> Daftar Diagnosa</a>
+                    <li><a><i class="fa fa-calendar"></i> Jadwal Aktivitas</a>
+                        <!-- <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="{{ url('/daftarkonsultasi') }}">Level Two</a>
+                            </li>
+                            <li><a href="#level2_1">Level Two</a>
+                            </li>
+                            <li><a href="#level2_2">Level Two</a>
+                            </li>
+                        </ul> -->
                     </li>
-                    <li><a><i class="fa fa-desktop"></i> Pertumbuhan <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-bar-chart"></i> Pertumbuhan <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ url('/hasilpemeriksaan') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Hasil Pemeriksaan</a></li>
                             <li><a href="media_gallery.html">Pemeriksaan</a></li>
@@ -41,18 +58,11 @@
                     </li>
                     <li><a><i class="fa fa-sitemap"></i> Perkembangan <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a>Jadwal Aktivitas<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li class="sub_menu"><a href="level2.html">Level Two</a>
-                                    </li>
-                                    <li><a href="#level2_1">Level Two</a>
-                                    </li>
-                                    <li><a href="#level2_2">Level Two</a>
-                                    </li>
-                                </ul>
+                            <li class="nav-item">
+                                <a href="{{route('diagnosa.index')}}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}">Daftar Diagnosa</a>
                             </li>
                             <li>
-                                <a href="{{ url('/daftarkonsultasi') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Daftar Konsultasi</a>
+                                <a href="{{route('konsultasi.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Daftar Konsultasi</a>
                             </li>
                         </ul>
                     </li>

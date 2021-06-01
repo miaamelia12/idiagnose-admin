@@ -16,11 +16,11 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Daftar Konsultasi</h3>
+            <h3>Data Konsultan</h3>
         </div>
         <div class="title_right">
             <div class="col-md-4 form-group row pull-right top_search">
-                <a href="{{route('konsultasi.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
+                <a href="{{route('konsultan.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
             </div>
         </div>
     </div>
@@ -37,10 +37,7 @@
                                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>Nama Anak</th>
-                                            <th>Tgl Konsultasi</th>
-                                            <th>Problema</th>
-                                            <th>Konsultan</th>
+                                            <th>Nama Dokter</th>
                                             <th>Spesialis</th>
                                             <th>Rumah Sakit</th>
                                             <th>Action</th>
@@ -49,33 +46,17 @@
                                     <tbody>
                                         @foreach($datas as $data)
                                         <tr>
-                                            <td>
-                                                {{$data->anak->nama}}
-                                            </td>
-                                            <td>
-                                                {{$data->tgl_konsultasi}}
-                                            </td>
-                                            <td>
-                                                {{$data->problema}}
-                                            </td>
-                                            <td>
-                                                {{$data->konsultan->nama_konsultan}}
-                                            </td>
-                                            <td>
-                                                {{$data->konsultan->spesialis}}
-                                            </td>
-                                            <td>
-                                                {{$data->konsultan->rumah_sakit}}
-                                            </td>
+                                            <td>{{$data->nama_konsultan}}</td>
+                                            <td>{{$data->spesialis}}</td>
+                                            <td>{{$data->rumah_sakit}}</td>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Action
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('konsultasi.show', $data->id)}}">Detail</a>
-                                                        <a class="dropdown-item" href="{{route('konsultasi.edit', $data->id)}}">Edit</a>
-                                                        <a class="dropdown-item" href="{{route('hapuskonsultasi', $data->id)}}">Hapus</a>
+                                                        <a class="dropdown-item" href="{{route('konsultan.edit', $data->id)}}">Edit</a>
+                                                        <a class="dropdown-item" href="{{route('hapuskonsultan', $data->id)}}">Hapus</a>
                                                     </div>
                                                 </div>
                                             </td>

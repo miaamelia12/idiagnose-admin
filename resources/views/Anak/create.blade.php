@@ -146,17 +146,16 @@
                                 <!-- Adding Diagnosa Modal -->
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Kesehatan <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="kesehatan">Kesehatan <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="last-name" name="kesehatan" required="required" class="form-control">
+                                    <input type="text" id="kesehatan" name="kesehatan" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <a href="{{route('anak.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <a href="{{route('konsultasi.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ class CreateKonsultanTable extends Migration
     {
         Schema::create('konsultan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama');
+            $table->string('nama_konsultan');
             $table->string('spesialis');
             $table->string('rumah_sakit');
             $table->timestamps();

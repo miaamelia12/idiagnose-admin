@@ -23,6 +23,7 @@ class CreateAnakTable extends Migration
             $table->integer('IQ');
             $table->string('kesehatan');
             $table->string('pendidikan');
+            $table->string('profil')->nullable();
             $table->timestamps();
         });
     }
