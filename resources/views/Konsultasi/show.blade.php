@@ -22,53 +22,53 @@
                             <td width="35%">Nama Anak </td>
                             <td width="1%"> : </td>
                             <td>
-                                {{$datas->anak->nama}}
+                                {{ $datas->nama }}
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Tanggal Konsultasi</td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->tgl_konsultasi}}</td>
+                            <td>{{ date('d-m-Y', strtotime($datas->tgl_konsultasi)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Problema </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->problema}}</td>
+                            <td>{{ $datas->problema }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Konsultan </td>
                             <td width="1%"> : </td>
                             <td>
-                                {{$datas->konsultan->nama_konsultan}}
+                                {{ $datas->nama_konsultan }}
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Spesialis </td>
                             <td width="1%"> : </td>
                             <td>
-                                {{$datas->konsultan->spesialis}}
+                                {{ $datas->spesialis }}
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Rumah Sakit </td>
                             <td width="1%"> : </td>
                             <td>
-                                {{$datas->konsultan->rumah_sakit}}
+                                {{ $datas->rumah_sakit }}
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Pendamping </td>
                             <td width="1%"> : </td>
                             <td>
-                                @foreach($datas->pendamping as $item)
-                                <span>{{$item->nama_pendamping}}</span>, <br />
+                                @foreach($pendamping as $item)
+                                <span>{{ $item->nama_pendamping }}</span>, <br />
                                 @endforeach
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Analisis Ahli </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->analisis_ahli}}</td>
+                            <td>{{ $datas->analisis_ahli }}</td>
                         </tr>
                     </table>
                     <br>

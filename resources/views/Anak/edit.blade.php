@@ -1,5 +1,6 @@
 @section('css')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="{{asset('assets/template/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
 @stop
 
 @extends('layout.backend-dashboard.app')
@@ -38,37 +39,48 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label for="usia" class="col-form-label col-md-3 col-sm-3 label-align">Usia (bulan) <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="usia" id="usia" class="form-control" type="number" required="required" value="{{ $datas->usia }}">
+                                    <input name="usia" id="usia" class="form-control" type="number" hidden value="{{ $datas->usia }}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="berat_badan" class="col-form-label col-md-3 col-sm-3 label-align">Berat Badan <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="berat_badan" id="berat_badan" class="form-control" type="text" required="required" value="{{ $datas->berat_badan }}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label for="tinggi_badan" class="col-form-label col-md-3 col-sm-3 label-align">Tinggi Badan <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" required="required" value="{{ $datas->tinggi_badan }}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="tgl_lahir" id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" value="{{ $datas->tgl_lahir }}">
-                                    <script>
-                                        function timeFunctionLong(input) {
-                                            setTimeout(function() {
-                                                input.type = 'text';
-                                            }, 60000);
-                                        }
-                                    </script>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='myDatepicker2'>
+                                            <input type='text' class="form-control" name="tgl_lahir" placeholder="dd-mm-yyyy" value="{{ date('d-m-Y', strtotime($datas->tgl_lahir)) }}" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk Yayasan Sayap Ibu <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="tgl_masuk_ysi" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" value="{{ $datas->tgl_masuk_ysi }}">
-                                    <script>
-                                        function timeFunctionLong(input) {
-                                            setTimeout(function() {
-                                                input.type = 'text';
-                                            }, 60000);
-                                        }
-                                    </script>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='myDatepicker3'>
+                                            <input type='text' class="form-control" name="tgl_masuk_ysi" placeholder="dd-mm-yyyy" value="{{ date('d-m-Y', strtotime($datas->tgl_masuk_ysi)) }}" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -105,17 +117,10 @@
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kesehatan">Kesehatan <span class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="kesehatan" name="kesehatan" required="required" class="form-control" value="{{ $datas->kesehatan }}">
+                                <div class="col-md-9 col-sm-9 ">
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="kesehatan" id="kesehatan" required="required" autofocus><?php echo $datas['kesehatan'] ?></textarea>
                                 </div>
                             </div>
-                            <!-- <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
-                                <div class="col-md-6">
-                                    <img width="200" height="200" @if($datas->profil) src="{{ asset('images/anak/'.$datas->profil) }}" @endif />
-                                    <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
-                                </div>
-                            </div> -->
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
@@ -135,6 +140,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<script src="{{asset('assets/template/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 
 @php
 $diagnosa_ids = [];
@@ -156,25 +162,13 @@ array_push($diagnosa_ids, $diagnose->id);
         $('.diagnosa').trigger('change');
     });
 
-    // function readURL() {
-    //     var input = this;
-    //     if (input.files && input.files[0]) {
-    //         var reader = new FileReader();
-    //         reader.onload = function(e) {
-    //             $(input).prev().attr('src', e.target.result);
-    //         }
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
-    // }
+    $('#myDatepicker2').datetimepicker({
+        format: 'DD-MM-YYYY'
+    });
 
-    // $(function() {
-    //     $(".uploads").change(readURL)
-    //     $("#f").submit(function() {
-    //         // do ajax submit or just classic form submit
-    //         //  alert("fake subminting")
-    //         return false
-    //     })
-    // })
+    $('#myDatepicker3').datetimepicker({
+        format: 'DD-MM-YYYY'
+    });
 </script>
 @stop
 

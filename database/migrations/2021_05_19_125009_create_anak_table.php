@@ -17,13 +17,14 @@ class CreateAnakTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->integer('usia');
+            $table->float('berat_badan');
+            $table->float('tinggi_badan');
             $table->date('tgl_lahir')->nullable();
             $table->date('tgl_masuk_ysi')->nullable();
             $table->enum('jk', ['Laki-laki', 'Perempuan']);
             $table->integer('IQ');
             $table->string('kesehatan');
             $table->string('pendidikan');
-            $table->string('profil')->nullable();
             $table->timestamps();
         });
     }

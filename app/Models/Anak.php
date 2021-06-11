@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,8 +10,7 @@ class Anak extends Model
 {
     use HasFactory;
     protected $table = "anak";
-    protected $fillable = ['nama', 'usia', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan', 'profil'];
-
+    protected $fillable = ['nama', 'usia', 'berat_badan', 'tinggi_badan', 'tgl_lahir', 'tgl_masuk_ysi', 'jk', 'IQ', 'kesehatan', 'pendidikan'];
 
     public function getNamaAnakAtrribute($nama)
     {
@@ -19,7 +19,7 @@ class Anak extends Model
 
     public function setNamaAttribute($nama)
     {
-        $this->attributes['nama'] = strtolower($nama);
+        $this->attributes['nama'] = ucfirst($nama);
     }
 
     public function diagnosa()

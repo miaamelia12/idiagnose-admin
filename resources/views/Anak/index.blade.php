@@ -38,10 +38,10 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Usia (bulan)</th>
                                             <th>Tgl Lahir</th>
                                             <th>Tgl Masuk YSI</th>
                                             <th>Jenis Kelamin</th>
+                                            <th>Pendidikan</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -55,27 +55,27 @@
                                                 <img src="{{url('images/anak/default.png')}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
                                                 @endif
                                                 <div style="margin-top: 15px;"> -->
-                                                {{$data->nama}}
+                                                {{ $data->nama }}
                                                 <!-- </div> -->
                                             </td>
                                             <td>
                                                 <!-- <div style="margin-top: 15px;"> -->
-                                                {{$data->usia}}
+                                                {{ date('d-m-Y', strtotime($data->tgl_lahir)) }}
                                                 <!-- </div> -->
                                             </td>
                                             <td>
                                                 <!-- <div style="margin-top: 15px;"> -->
-                                                {{$data->tgl_lahir}}
+                                                {{ date('d-m-Y', strtotime($data->tgl_masuk_ysi)) }}
                                                 <!-- </div> -->
                                             </td>
                                             <td>
                                                 <!-- <div style="margin-top: 15px;"> -->
-                                                {{$data->tgl_masuk_ysi}}
+                                                {{ $data->jk }}
                                                 <!-- </div> -->
                                             </td>
                                             <td>
                                                 <!-- <div style="margin-top: 15px;"> -->
-                                                {{$data->jk}}
+                                                {{ $data->pendidikan }}
                                                 <!-- </div> -->
                                             </td>
                                             <td>
@@ -120,6 +120,6 @@
 <script src="{{asset('assets/template/vendors/jszip/dist/jszip.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-@show
+@stop
 
 @endsection

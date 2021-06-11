@@ -40,20 +40,28 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-calendar"></i> Jadwal Aktivitas</a>
-                        <!-- <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{ url('/daftarkonsultasi') }}">Level Two</a>
+                    <li><a><i class="fa fa-calendar"></i> Jadwal Aktivitas <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link"> Batita</a>
                             </li>
-                            <li><a href="#level2_1">Level Two</a>
+                            <li class="nav-item">
+                                <a href="{{route('aktivitas-balita.index')}}" class="nav-link {{ setActive(['jadwal-aktivitas*']) }}"> Balita</a>
                             </li>
-                            <li><a href="#level2_2">Level Two</a>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link"> Anak-anak</a>
                             </li>
-                        </ul> -->
+                        </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart"></i> Pertumbuhan <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="{{ url('/hasilpemeriksaan') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Hasil Pemeriksaan</a></li>
-                            <li><a href="media_gallery.html">Pemeriksaan</a></li>
+                            <li><a>Pemeriksaan<span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li class="sub_menu"><a href="{{route('data-sampel.index')}}" class="nav-link {{ setActive(['data-sampel*']) }}">Data Sampel</a></li>
+                                    <li><a href="{{route('prediksi-stunting.index')}}" class="nav-link {{ setActive(['prediksi-stunting*']) }}">Periksa</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{route('hasil-pemeriksaan.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Hasil Pemeriksaan</a></li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-sitemap"></i> Perkembangan <span class="fa fa-chevron-down"></span></a>

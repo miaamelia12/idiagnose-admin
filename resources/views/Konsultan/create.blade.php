@@ -29,7 +29,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_konsultan">Nama Dokter <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_konsultan" type="text" id="nama_konsultan" required="required" class="form-control" autofocus>
+                                    <input name="nama_konsultan" type="text" id="nama_konsultan" value="{{ old('nama_konsultan') }}" required class="form-control" autofocus>
                                 </div>
                             </div>
                             <div class="item form-group">

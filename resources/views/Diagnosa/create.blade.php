@@ -29,21 +29,21 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_diagnosa">Nama Diagnosa <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_diagnosa" type="text" id="nama_diagnosa" required="required" class="form-control" autofocus>
+                                    <input name="nama_diagnosa" type="text" id="nama_diagnosa" value="{{ old('nama_diagnosa') }}" required class="form-control" autofocus>
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_lain">Nama Lain
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_lain" type="text" id="nama_lain" class="form-control">
+                                    <input name="nama_lain" type="text" id="nama_lain" class="form-control" value="{{ old('nama_lain') }}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="deskripsi">Deskripsi <span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="deskripsi" id="deskripsi" required="required" autofocus></textarea>
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="deskripsi" id="deskripsi" value="{{ old('deskripsi') }}" required autofocus></textarea>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

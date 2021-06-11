@@ -28,46 +28,56 @@
                         <tr>
                             <td width="35%">Nama Lengkap </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->nama}}</td>
+                            <td>{{ $datas->nama }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Usia</td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->usia}}</td>
+                            <td>{{ $datas->usia }} bulan</td>
+                        </tr>
+                        <tr>
+                            <td width="35%">Berat Badan</td>
+                            <td width="1%"> : </td>
+                            <td>{{ $datas->berat_badan }}</td>
+                        </tr>
+                        <tr>
+                            <td width="35%">Tinggi Badan</td>
+                            <td width="1%"> : </td>
+                            <td>{{ $datas->tinggi_badan }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Tanggal Lahir </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->tgl_lahir}}</td>
+                            <td>{{ date('d-m-Y', strtotime($datas->tgl_lahir)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Tanggal Masuk Yayasan Sayap Ibu </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->tgl_masuk_ysi}}</td>
+                            <td>{{ date('d-m-Y', strtotime($datas->tgl_masuk_ysi)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Jenis Kelamin </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->jk}}</td>
+                            <td>{{ $datas->jk }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Diagnosa </td>
                             <td width="1%"> : </td>
                             <td>
                                 @foreach($datas->diagnosa as $item)
-                                <span>{{$item->nama_diagnosa}}</span>, <br />
+                                <span>{{ $item->nama_diagnosa }}</span>, <br />
                                 @endforeach
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Kesehatan </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->kesehatan}}</td>
+                            <td>{{ $datas->kesehatan }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Pendidikan </td>
                             <td width="1%"> : </td>
-                            <td>{{$datas->pendidikan}}</td>
+                            <td>{{ $datas->pendidikan }}</td>
                         </tr>
                     </table>
                     <br>

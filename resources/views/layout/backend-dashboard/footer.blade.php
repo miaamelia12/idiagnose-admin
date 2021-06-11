@@ -1,4 +1,4 @@
 <div class="pull-right">
-    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    Monika - Monitoring and Classification Stunting by Fahmia Amelia
 </div>
 <div class="clearfix"></div>

@@ -18,9 +18,9 @@ class CreateDaftarKonsultasiTable extends Migration
             $table->date('tgl_konsultasi')->nullable();
             $table->string('problema');
             $table->longText('analisis_ahli');
-            $table->unsignedBigInteger('anak_id');
+            $table->unsignedBigInteger('anak_id')->index();
             $table->foreign('anak_id')->references('id')->on('anak')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('konsultan_id');
+            $table->unsignedBigInteger('konsultan_id')->index();
             $table->foreign('konsultan_id')->references('id')->on('konsultan')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

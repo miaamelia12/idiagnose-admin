@@ -1,10 +1,7 @@
 @section('css')
 <style>
     .panel {
-        background-color:
-            #F2F5F7;
-
-
+        background-color: #F2F5F7;
     }
 </style>
 @stop

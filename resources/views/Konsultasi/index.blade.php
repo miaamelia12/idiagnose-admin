@@ -50,22 +50,22 @@
                                         @foreach($datas as $data)
                                         <tr>
                                             <td>
-                                                {{$data->anak->nama}}
+                                                {{ $data->anak->nama }}
                                             </td>
                                             <td>
-                                                {{$data->tgl_konsultasi}}
+                                                {{ date('d-m-Y', strtotime($data->tgl_konsultasi)) }}
                                             </td>
                                             <td>
-                                                {{$data->problema}}
+                                                {{ $data->problema }}
                                             </td>
                                             <td>
-                                                {{$data->konsultan->nama_konsultan}}
+                                                {{ $data->konsultan->nama_konsultan }}
                                             </td>
                                             <td>
-                                                {{$data->konsultan->spesialis}}
+                                                {{ $data->konsultan->spesialis }}
                                             </td>
                                             <td>
-                                                {{$data->konsultan->rumah_sakit}}
+                                                {{ $data->konsultan->rumah_sakit }}
                                             </td>
                                             <td>
                                                 <div class="btn-group">
