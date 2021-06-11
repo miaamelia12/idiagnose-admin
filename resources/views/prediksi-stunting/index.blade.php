@@ -56,37 +56,9 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="tinggi_badan" id="tb" class="form-control col-md-8" type="text" disabled>
                                     <input name="tinggi_badan" id="tinggi_badan" class="form-control col-md-8" type="hidden">
-                                    <!-- <a href="{{route('hasil-pemeriksaan.index')}}" class="btn btn-success" style="margin-left: 30px;">Submit</a> -->
                                     <button type="submit" class="btn btn-success" style="margin-left: 30px;">Submit</button>
                                 </div>
                             </div>
-
-                            <!-- <div class="form-group row ">
-                                <label class="control-label col-md-2 col-sm-1" for="nama_anak">Nama Anak <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_anak" type="text" id="nama_anak" required="required" class="form-control col-md-8" autofocus>
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="usia" class="control-label col-md-2 col-sm-1">Usia (bulan) <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="usia" id="usia" class="form-control col-md-8" type="number" min="0" max="60" required="required">
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="berat_badan" class="control-label col-md-2 col-sm-1">Berat Badan <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="berat_badan" id="berat_badan" class="form-control col-md-8" type="text" required="required">
-                                </div>
-                            </div>
-                            <div class="form-group row ">
-                                <label for="tinggi_badan" class="control-label col-md-2 col-sm-1">Tinggi Badan <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control col-md-8" type="text" required="required">
-                                    <button type="submit" class="btn btn-success" style="margin-left: 30px;">Submit</button>
-                                </div>
-                            </div> -->
                         </form>
                     </div>
                 </div>
