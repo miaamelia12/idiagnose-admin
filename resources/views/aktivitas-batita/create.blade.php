@@ -11,13 +11,13 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Tambah Jadwal Aktivitas Balita</h3>
+            <h3>Tambah Jadwal Aktivitas Batita</h3>
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <form method="POST" id="validate_form" action="{{route('aktivitas-balita.store')}}" enctype="multipart/form-data">
+    <form method="POST" id="validate_form" action="{{route('aktivitas-batita.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -63,7 +63,7 @@
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <a href="{{route('aktivitas-balita.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
+                                    <a href="{{route('aktivitas-batita.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
                                     <button class="btn btn-primary" type="reset">Reset</button>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>

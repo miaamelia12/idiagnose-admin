@@ -16,11 +16,11 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Aktivitas Balita YSI Sehari-hari</h3>
+            <h3>Aktivitas Anak YSI Sehari-hari</h3>
         </div>
         <div class="title_right">
             <div class="col-md-4 form-group row pull-right top_search">
-                <a href="{{route('aktivitas-balita.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
+                <a href="{{route('aktivitas-anak.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Aktivitas Anak Usia 3-4 Tahun</h2>
+                    <h2>Aktivitas Anak Usia 8-12 Tahun</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -70,9 +70,9 @@
                                                     Aksi
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.show', $data->id)}}">Detail</a>
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.edit', $data->id)}}">Edit</a>
-                                                    <a class="dropdown-item" href="{{route('hapusbalita', $data->id)}}">Hapus</a>
+                                                    <a class="dropdown-item" href="{{route('aktivitas-anak.show', $data->id)}}">Detail</a>
+                                                    <a class="dropdown-item" href="{{route('aktivitas-anak.edit', $data->id)}}">Edit</a>
+                                                    <a class="dropdown-item" href="{{route('hapusaktivitasanak', $data->id)}}">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>

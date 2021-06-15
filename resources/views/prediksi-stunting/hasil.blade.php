@@ -50,7 +50,13 @@
                             <td width="35%">Status Pertumbuhan </td>
                             <td width="1%"> : </td>
                             <td>
+                                @if($get_hasil->status == "Normal")
+                                <span class="badge badge-success">{{ $get_hasil->status }}</span>
+                                @elseif($get_hasil->status == "Pendek")
                                 <span class="badge badge-warning">{{ $get_hasil->status }}</span>
+                                @elseif($get_hasil->status == "Sangat Pendek")
+                                <span class="badge badge-danger">{{ $get_hasil->status }}</span>
+                                @endif
                             </td>
                         </tr>
                     </table>

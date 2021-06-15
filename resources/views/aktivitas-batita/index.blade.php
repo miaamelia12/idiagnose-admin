@@ -16,11 +16,11 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Aktivitas Balita YSI Sehari-hari</h3>
+            <h3>Aktivitas Batita YSI Sehari-hari</h3>
         </div>
         <div class="title_right">
             <div class="col-md-4 form-group row pull-right top_search">
-                <a href="{{route('aktivitas-balita.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
+                <a href="{{route('aktivitas-batita.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Aktivitas Anak Usia 3-4 Tahun</h2>
+                    <h2>Aktivitas Anak Usia 0-2 Tahun</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -55,8 +55,6 @@
                                         <td>
                                             @if($data->jam_selesai == "00:00:00")
                                             {{ $data->jam_mulai }}
-                                            @elseif(empty($data->jam_selesai))
-                                            {{ $data->jam_mulai }}
                                             @else
                                             {{ $data->jam_mulai }} - {{ $data->jam_selesai }}
                                             @endif
@@ -70,9 +68,9 @@
                                                     Aksi
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.show', $data->id)}}">Detail</a>
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.edit', $data->id)}}">Edit</a>
-                                                    <a class="dropdown-item" href="{{route('hapusbalita', $data->id)}}">Hapus</a>
+                                                    <a class="dropdown-item" href="{{route('aktivitas-batita.show', $data->id)}}">Detail</a>
+                                                    <a class="dropdown-item" href="{{route('aktivitas-batita.edit', $data->id)}}">Edit</a>
+                                                    <a class="dropdown-item" href="{{route('hapusbatita', $data->id)}}">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>

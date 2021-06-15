@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Monika</span></a>
+            <a href="index.html" class="site_title"><i class="fa fa-stethoscope"></i> <span>Monika</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -43,25 +43,21 @@
                     <li><a><i class="fa fa-calendar"></i> Jadwal Aktivitas <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="nav-item">
-                                <a href="#" class="nav-link"> Batita</a>
+                                <a href="{{route('aktivitas-batita.index')}}" class="nav-link {{ setActive(['aktivitas-batita*']) }}"> Batita</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('aktivitas-balita.index')}}" class="nav-link {{ setActive(['jadwal-aktivitas*']) }}"> Balita</a>
+                                <a href="{{route('aktivitas-balita.index')}}" class="nav-link {{ setActive(['aktivitas-balita*']) }}"> Balita</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link"> Anak-anak</a>
+                                <a href="{{route('aktivitas-anak.index')}}" class="nav-link {{ setActive(['aktivitas-anak*']) }}"> Anak-anak</a>
                             </li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-bar-chart"></i> Pertumbuhan <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a>Pemeriksaan<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li class="sub_menu"><a href="{{route('data-sampel.index')}}" class="nav-link {{ setActive(['data-sampel*']) }}">Data Sampel</a></li>
-                                    <li><a href="{{route('prediksi-stunting.index')}}" class="nav-link {{ setActive(['prediksi-stunting*']) }}">Periksa</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{route('hasil-pemeriksaan.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Hasil Pemeriksaan</a></li>
+                            <li class="sub_menu"><a href="{{route('data-sampel.index')}}" class="nav-link {{ setActive(['data-sampel*']) }}">Data Sampel</a></li>
+                            <li><a href="{{route('prediksi-stunting.index')}}" class="nav-link {{ setActive(['prediksi-stunting*']) }}">Periksa</a></li>
+                            <!-- <li><a href="{{route('riwayat-prediksi.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Riwayat Prediksi</a></li> -->
                         </ul>
                     </li>
                     <li><a><i class="fa fa-sitemap"></i> Perkembangan <span class="fa fa-chevron-down"></span></a>
@@ -77,22 +73,5 @@
             </div>
         </div>
         <!-- /sidebar menu -->
-
-        <!-- /menu footer buttons -->
-        <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-            </a>
-        </div>
-        <!-- /menu footer buttons -->
     </div>
 </div>

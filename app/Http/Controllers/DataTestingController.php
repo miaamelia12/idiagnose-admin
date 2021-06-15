@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anak;
-use App\Models\DataTesting;
-use App\Models\DataTraining;
 use App\Models\EuclideanDistance;
 use App\Models\HasilPrediksi;
 use Illuminate\Http\Request;
@@ -112,6 +110,6 @@ class DataTestingController extends Controller
             'status' => $hasil_status,
         ];
 
-        return view('hasil-pemeriksaan.index', compact('get_hasil'));
+        return view('prediksi-stunting.hasil', compact('get_hasil'));
     }
 }

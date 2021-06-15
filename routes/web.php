@@ -1,20 +1,17 @@
 <?php
 
+use App\Http\Controllers\AktivitasAnakController;
 use App\Http\Controllers\AktivitasBalitaController;
+use App\Http\Controllers\AktivitasBatitaController;
 use App\Http\Controllers\AnakController;
 use App\Http\Controllers\DaftarKonsultasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTestingController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\DiagnosaController;
-use App\Http\Controllers\HasilPemeriksaan;
-use App\Http\Controllers\HasilPemeriksaanController;
-use App\Http\Controllers\JadwalAktivitasController;
 use App\Http\Controllers\KonsultanController;
 use App\Http\Controllers\PendampingController;
-use App\Http\Controllers\PerkembanganController;
-use App\Http\Controllers\PertumbuhanController;
-use App\Models\DataTraining;
+use App\Http\Controllers\RiwayatPrediksiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,7 +46,7 @@ Route::get('hapuskonsultan/{id}', [KonsultanController::class, 'hapus'])->name('
 Route::resource('konsultasi', DaftarKonsultasiController::class);
 Route::get('hapuskonsultasi/{id}', [DaftarKonsultasiController::class, 'hapus'])->name('hapuskonsultasi');
 
-Route::resource('hasil-pemeriksaan', HasilPemeriksaanController::class);
+Route::resource('riwayat-prediksi', RiwayatPrediksiController::class);
 
 Route::resource('data-sampel', DataTrainingController::class);
 Route::post('', [DataTrainingController::class, 'store'])->name('data-sampel.store');
@@ -60,4 +57,11 @@ Route::resource('prediksi-stunting', DataTestingController::class);
 Route::get('get/details/{id}', [DataTestingController::class, 'getDetails'])->name('getDetails');
 Route::get('hasil', [DataTestingController::class, 'hitung'])->name('hasil');
 
+Route::resource('aktivitas-batita', AktivitasBatitaController::class);
+Route::get('hapusbatita/{id}', [AktivitasBatitaController::class, 'hapus'])->name('hapusbatita');
+
 Route::resource('aktivitas-balita', AktivitasBalitaController::class);
+Route::get('hapusbalita/{id}', [AktivitasBalitaController::class, 'hapus'])->name('hapusbalita');
+
+Route::resource('aktivitas-anak', AktivitasAnakController::class);
+Route::get('hapusaktivitasanak/{id}', [AktivitasAnakController::class, 'hapus'])->name('hapusaktivitasanak');
