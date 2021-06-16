@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Anak;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +19,10 @@ class DatabaseSeeder extends Seeder
             KonsultanTableSeeder::class,
             PendampingTableSeeder::class,
             AktivitasBalitaTableSeeder::class,
+            DataTrainingTableSeeder::class,
+            AktivitasBatitaTableSeeder::class,
+            AktivitasBalitaTableSeeder::class,
+            AktivitasAnakTableSeeder::class,
         ]);
     }
 }
