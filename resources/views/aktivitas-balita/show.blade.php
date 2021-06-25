@@ -28,11 +28,11 @@
                             <td width="1%"> : </td>
                             <td>
                                 @if($datas->jam_selesai == "00:00:00")
-                                {{ $datas->jam_mulai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }}
                                 @elseif(empty($datas->jam_selesai))
-                                {{ $datas->jam_mulai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }}
                                 @else
-                                {{ $datas->jam_mulai }} - {{ $datas->jam_selesai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }} - {{ date('H:i', strtotime($datas->jam_selesai)) }}
                                 @endif
                             </td>
                         </tr>
@@ -45,7 +45,7 @@
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" onclick="window.location='{{ route("aktivitas-batita.index")}}'" class="btn btn-secondary">Kembali</button>
+                            <button type="submit" onclick="window.location='{{ route("aktivitas-balita.index")}}'" class="btn btn-secondary">Kembali</button>
                         </div>
                     </div>
                 </div>

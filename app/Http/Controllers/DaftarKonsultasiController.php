@@ -47,7 +47,7 @@ class DaftarKonsultasiController extends Controller
     {
         DaftarKonsultasi::create([
             'anak_id' => $request->get('anak_id'),
-            'tgl_konsultasi' => Carbon::createFromFormat('d-m-Y',  $request->get('tgl_konsultasi')),
+            'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_konsultasi')),
             'problema' => $request->get('problema'),
             'konsultan_id' => $request->get('konsultan_id'),
             'analisis_ahli' => $request->get('analisis_ahli'),
@@ -92,7 +92,7 @@ class DaftarKonsultasiController extends Controller
 
         $konsultasi = DaftarKonsultasi::find($id)->update([
             'anak_id' => $request->get('anak_id'),
-            'tgl_konsultasi' => Carbon::createFromFormat('d-m-Y',  $request->get('tgl_konsultasi')),
+            'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_konsultasi')),
             'problema' => $request->get('problema'),
             'konsultan_id' => $request->get('konsultan_id'),
             'analisis_ahli' => $request->get('analisis_ahli'),

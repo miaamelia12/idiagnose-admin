@@ -1,11 +1,3 @@
-@section('css')
-<style>
-    .panel {
-        background-color: #F2F5F7;
-    }
-</style>
-@stop
-
 @extends('layout.backend-dashboard.app')
 
 @section('title','Monika - Admin')
@@ -32,7 +24,7 @@
                     <!-- start accordion -->
                     <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
                         @foreach($datas as $data)
-                        <div class="panel">
+                        <div class="panel" style="background-color: #F2F5F7;">
                             <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo{{ $data->id }}" aria-expanded="false" aria-controls="collapseTwo">
                                 <h4 class="panel-title col-md-11">{{$data->nama_diagnosa}}
                                 </h4>

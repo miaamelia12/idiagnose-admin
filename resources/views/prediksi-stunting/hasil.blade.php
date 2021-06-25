@@ -6,7 +6,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Hasil Prediksi Status Pertumbuhan</h3>
+            <h3>Hasil Prediksi Stunting</h3>
         </div>
     </div>
 
@@ -29,25 +29,25 @@
                             <td width="35%">Usia</td>
                             <td width="1%"> : </td>
                             <td>
-                                {{ $get_hasil->usia }}
+                                {{ $get_hasil->usia }} bulan
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Berat Badan</td>
                             <td width="1%"> : </td>
                             <td>
-                                {{ $get_hasil->berat_badan }}
+                                {{ $get_hasil->berat_badan }} kg
                             </td>
                         </tr>
                         <tr>
                             <td width="35%">Tinggi Badan</td>
                             <td width="1%"> : </td>
                             <td>
-                                {{ $get_hasil->tinggi_badan }}
+                                {{ $get_hasil->tinggi_badan }} cm
                             </td>
                         </tr>
                         <tr>
-                            <td width="35%">Status Pertumbuhan </td>
+                            <td width="35%">Status</td>
                             <td width="1%"> : </td>
                             <td>
                                 @if($get_hasil->status == "Normal")

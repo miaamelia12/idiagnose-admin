@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AktivitasAnak;
+use App\Models\JadwalAktivitas;
 use Illuminate\Http\Request;
 
 class AktivitasAnakController extends Controller
 {
     public function index(Request $request)
     {
-        $datas = AktivitasAnak::orderBy('jam_mulai', 'asc')->get();
+        $datas = JadwalAktivitas::where('kategori_aktivitas', 'Anak')->orderBy('jam_mulai', 'asc')->get();
 
         return view('aktivitas-anak.index', compact('datas'));
     }
 
     public function show($id)
     {
-        $datas = AktivitasAnak::findOrFail($id);
+        $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-anak.show', compact('datas'));
     }
@@ -29,21 +29,21 @@ class AktivitasAnakController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        AktivitasAnak::create($input);
+        JadwalAktivitas::create($input);
 
         return redirect()->route('aktivitas-anak.index');
     }
 
     public function edit($id)
     {
-        $datas = AktivitasAnak::findOrFail($id);
+        $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-anak.edit', compact('datas'));
     }
 
     public function update(Request $request, $id)
     {
-        $aktivitas_anak = AktivitasAnak::findOrFail($id);
+        $aktivitas_anak = JadwalAktivitas::findOrFail($id);
         $request->all();
         $aktivitas_anak->update($request->all());
 
@@ -52,7 +52,7 @@ class AktivitasAnakController extends Controller
 
     public function hapus($id)
     {
-        AktivitasAnak::findOrFail($id)->delete();
+        JadwalAktivitas::findOrFail($id)->delete();
 
         return redirect()->route('aktivitas-anak.index');
     }

@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AktivitasBalita;
+use App\Models\JadwalAktivitas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AktivitasBalitaController extends Controller
 {
     public function index(Request $request)
     {
-        $datas = AktivitasBalita::orderBy('jam_mulai', 'asc')->get();
+        $datas = JadwalAktivitas::where('kategori_aktivitas', 'Balita')->orderBy('jam_mulai', 'asc')->get();
 
         return view('aktivitas-balita.index', compact('datas'));
     }
 
     public function show($id)
     {
-        $datas = AktivitasBalita::findOrFail($id);
+        $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-balita.show', compact('datas'));
     }
@@ -28,31 +29,40 @@ class AktivitasBalitaController extends Controller
 
     public function store(Request $request)
     {
-        $input = $request->all();
-        AktivitasBalita::create($input);
+        JadwalAktivitas::create([
+            'kegiatan' => $request->get('kegiatan'),
+            'jam_mulai' => Carbon::createFromFormat('h:i',  $request->get('jam_mulai')),
+            'jam_selesai' => Carbon::createFromFormat('h:i',  $request->get('jam_selesai')),
+            'keterangan' => $request->get('keterangan'),
+            'kategori_aktivitas' => $request->get('kategori_aktivitas'),
+        ]);
 
         return redirect()->route('aktivitas-balita.index');
     }
 
     public function edit($id)
     {
-        $datas = AktivitasBalita::findOrFail($id);
+        $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-balita.edit', compact('datas'));
     }
 
     public function update(Request $request, $id)
     {
-        $aktivitas_balita = AktivitasBalita::findOrFail($id);
-        $request->all();
-        $aktivitas_balita->update($request->all());
+        JadwalAktivitas::find($id)->update([
+            'kegiatan' => $request->get('kegiatan'),
+            'jam_mulai' => Carbon::createFromFormat('h:i',  $request->get('jam_mulai')),
+            'jam_selesai' => Carbon::createFromFormat('h:i',  $request->get('jam_selesai')),
+            'keterangan' => $request->get('keterangan'),
+            'kategori_aktivitas' => $request->get('kategori_aktivitas'),
+        ]);
 
         return redirect()->route('aktivitas-balita.index');
     }
 
     public function hapus($id)
     {
-        AktivitasBalita::findOrFail($id)->delete();
+        JadwalAktivitas::findOrFail($id)->delete();
 
         return redirect()->route('aktivitas-balita.index');
     }

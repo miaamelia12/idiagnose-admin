@@ -53,7 +53,7 @@
                                                 {{ $data->anak->nama }}
                                             </td>
                                             <td>
-                                                {{ date('d-m-Y', strtotime($data->tgl_konsultasi)) }}
+                                                {{ date('d M Y', strtotime($data->tgl_konsultasi)) }}
                                             </td>
                                             <td>
                                                 {{ $data->problema }}

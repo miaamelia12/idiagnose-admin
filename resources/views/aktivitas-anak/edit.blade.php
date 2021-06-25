@@ -42,7 +42,7 @@
                                 <div class='input-group date col-md-6 col-sm-6' id='myDatepicker3'>
                                     <input type='text' class="form-control" name="jam_mulai" value="{{ $datas->jam_mulai }}" required />
                                     <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
                                     </span>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <div class='input-group date col-md-6 col-sm-6' id='myDatepicker4'>
                                     <input type='text' class="form-control" name="jam_selesai" value="{{ $datas->jam_selesai }}" />
                                     <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
                                     </span>
                                 </div>
                             </div>
@@ -59,6 +59,11 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="keterangan">Keterangan</label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="keterangan" type="text" id="keterangan" class="form-control" value="{{ $datas->keterangan }}" autofocus>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="kategori_aktivitas" type="text" id="kategori_aktivitas" class="form-control" value="Anak" hidden>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

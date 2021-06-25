@@ -6,10 +6,11 @@ use App\Models\Anak;
 use App\Models\Diagnosa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AnakController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $datas = Anak::all();
         return view('anak.index', compact('datas'));
@@ -37,9 +38,9 @@ class AnakController extends Controller
             'nama' => $request->get('nama'),
             'berat_badan' => $request->get('berat_badan'),
             'tinggi_badan' => $request->get('tinggi_badan'),
-            'tgl_lahir' => Carbon::createFromFormat('d-m-Y',  $tgl_lahir),
+            'tgl_lahir' => Carbon::createFromFormat('d M Y',  $tgl_lahir),
             'usia' => $usia,
-            'tgl_masuk_ysi' => Carbon::createFromFormat('d-m-Y',  $request->get('tgl_masuk_ysi')),
+            'tgl_masuk_ysi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_masuk_ysi')),
             'jk' => $request->get('jk'),
             'IQ' => $request->get('IQ'),
             'kesehatan' => $request->get('kesehatan'),
@@ -51,7 +52,7 @@ class AnakController extends Controller
         // $anak = Anak::create($input);
         $anak->diagnosa()->attach($request->input('diagnosa'));
 
-        return redirect()->route('anak.index');
+        return redirect()->route('anak.index')->with('success', 'Data Anak Berhasil Ditambahkan!');
     }
 
     public function edit($id)
@@ -73,8 +74,8 @@ class AnakController extends Controller
             'usia' => $usia,
             'berat_badan' => $request->get('berat_badan'),
             'tinggi_badan' => $request->get('tinggi_badan'),
-            'tgl_lahir' => Carbon::createFromFormat('d-m-Y',  $tgl_lahir),
-            'tgl_masuk_ysi' => Carbon::createFromFormat('d-m-Y',  $request->get('tgl_masuk_ysi')),
+            'tgl_lahir' => Carbon::createFromFormat('d M Y',  $tgl_lahir),
+            'tgl_masuk_ysi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_masuk_ysi')),
             'jk' => $request->get('jk'),
             'IQ' => $request->get('IQ'),
             'kesehatan' => $request->get('kesehatan'),
@@ -91,7 +92,9 @@ class AnakController extends Controller
 
     public function hapus($id)
     {
-        Anak::findOrFail($id)->delete();
-        return redirect()->route('anak.index');
+        $anak = Anak::findOrFail($id);
+        $anak->delete();
+
+        return response()->json(['status' => 'Data Berhasil Terhapus!']);
     }
 }

@@ -6,6 +6,8 @@
 <link href="{{asset('assets/template/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/template/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/template/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
+<link href="https://cdn.datatables.net/autofill/2.3.7/css/autoFill.dataTables.min.css" rel="stylesheet">
+
 @stop
 
 @extends('layout.backend-dashboard.app')
@@ -13,6 +15,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -48,47 +52,26 @@
                                     <tbody>
                                         @foreach($datas as $data)
                                         <tr>
+                                            <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                            <td style="display:none;">{{ $data->id }}</td>
                                             <td>
-                                                <!-- @if($data->profil)
-                                                <img src="{{url('images/anak/'. $data->profil)}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
-                                                @else
-                                                <img src="{{url('images/anak/default.png')}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
-                                                @endif
-                                                <div style="margin-top: 15px;"> -->
                                                 {{ $data->nama }}
-                                                <!-- </div> -->
                                             </td>
                                             <td>
-                                                <!-- <div style="margin-top: 15px;"> -->
-                                                {{ date('d-m-Y', strtotime($data->tgl_lahir)) }}
-                                                <!-- </div> -->
+                                                {{ date('d M Y', strtotime($data->tgl_lahir)) }}
                                             </td>
                                             <td>
-                                                <!-- <div style="margin-top: 15px;"> -->
-                                                {{ date('d-m-Y', strtotime($data->tgl_masuk_ysi)) }}
-                                                <!-- </div> -->
+                                                {{ date('d M Y', strtotime($data->tgl_masuk_ysi)) }}
                                             </td>
                                             <td>
-                                                <!-- <div style="margin-top: 15px;"> -->
                                                 {{ $data->jk }}
-                                                <!-- </div> -->
                                             </td>
                                             <td>
-                                                <!-- <div style="margin-top: 15px;"> -->
                                                 {{ $data->pendidikan }}
-                                                <!-- </div> -->
                                             </td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('anak.show', $data->id)}}">Detail</a>
-                                                        <a class="dropdown-item" href="{{route('anak.edit', $data->id)}}">Edit</a>
-                                                        <a class="dropdown-item" href="{{route('hapusanak', $data->id)}}">Hapus</a>
-                                                    </div>
-                                                </div>
+                                                <a class="btn btn-success" href="{{route('anak.edit', $data->id)}}"><i class="fa fa-pencil-square-o"></i></a>
+                                                <button class="btn btn-danger servicedeletebtn" type="button"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -120,6 +103,92 @@
 <script src="{{asset('assets/template/vendors/jszip/dist/jszip.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var table = $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('anak.index') }}",
+            type: "GET",
+            columns: [{
+                    data: 'id'
+                },
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'tgl_lahir'
+                },
+                {
+                    data: 'tgl_masuk_ysi'
+                },
+                {
+                    data: 'jk'
+                },
+                {
+                    data: 'pendidikan'
+                },
+                {
+                    data: 'action'
+                }
+            ],
+
+        });
+
+        $('.servicedeletebtn').click(function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/anak-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                // $('#datatable').DataTable().ajax.reload();
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                            // error: function(xhr) {
+                            //     swal({
+                            //         type: 'error',
+                            //         title: 'Oopss...',
+                            //         text: 'Terjadi Kesalahan!'
+                            //     });
+                            // }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
 @stop
 
 @endsection

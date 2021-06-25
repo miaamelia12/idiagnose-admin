@@ -28,7 +28,7 @@
                         <tr>
                             <td width="35%">Tanggal Konsultasi</td>
                             <td width="1%"> : </td>
-                            <td>{{ date('d-m-Y', strtotime($datas->tgl_konsultasi)) }}</td>
+                            <td>{{ date('d M Y', strtotime($datas->tgl_konsultasi)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Problema </td>

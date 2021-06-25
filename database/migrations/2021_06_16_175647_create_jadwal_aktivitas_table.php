@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAktivitasBatitaTable extends Migration
+class CreateJadwalAktivitasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateAktivitasBatitaTable extends Migration
      */
     public function up()
     {
-        Schema::create('aktivitas_batita', function (Blueprint $table) {
+        Schema::create('jadwal_aktivitas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->time('jam_mulai');
             $table->time('jam_selesai')->nullable();
             $table->string('kegiatan');
             $table->string('keterangan')->nullable();
+            $table->enum('kategori_aktivitas', ['Batita', 'Balita', 'Anak']);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateAktivitasBatitaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aktivitas_batita');
+        Schema::dropIfExists('jadwal_aktivitas');
     }
 }

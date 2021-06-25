@@ -49,7 +49,7 @@
                                         <div class='input-group date' id='myDatepicker2'>
                                             <input type='text' class="form-control" name="tgl_konsultasi" placeholder="dd-mm-yyyy" />
                                             <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
         $('.select').select2();
 
         $('#myDatepicker2').datetimepicker({
-            format: 'DD-MM-YYYY'
+            format: 'DD MMM YYYY'
         });
     });
 </script>

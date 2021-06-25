@@ -18,11 +18,11 @@ class DatabaseSeeder extends Seeder
             DiagnosaTableSeeder::class,
             KonsultanTableSeeder::class,
             PendampingTableSeeder::class,
-            AktivitasBalitaTableSeeder::class,
-            DataTrainingTableSeeder::class,
+            // DataTrainingTableSeeder::class,
             AktivitasBatitaTableSeeder::class,
             AktivitasBalitaTableSeeder::class,
             AktivitasAnakTableSeeder::class,
+            UsersTableSeeder::class,
         ]);
     }
 }

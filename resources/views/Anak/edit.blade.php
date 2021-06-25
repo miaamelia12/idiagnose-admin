@@ -61,9 +61,9 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker2'>
-                                            <input type='text' class="form-control" name="tgl_lahir" placeholder="dd-mm-yyyy" value="{{ date('d-m-Y', strtotime($datas->tgl_lahir)) }}" />
+                                            <input type='text' class="form-control" name="tgl_lahir" placeholder="dd-mm-yyyy" value="{{ date('d M Y', strtotime($datas->tgl_lahir)) }}" />
                                             <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
@@ -75,9 +75,9 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker3'>
-                                            <input type='text' class="form-control" name="tgl_masuk_ysi" placeholder="dd-mm-yyyy" value="{{ date('d-m-Y', strtotime($datas->tgl_masuk_ysi)) }}" />
+                                            <input type='text' class="form-control" name="tgl_masuk_ysi" placeholder="dd-mm-yyyy" value="{{ date('d M Y', strtotime($datas->tgl_masuk_ysi)) }}" />
                                             <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
@@ -163,11 +163,11 @@ array_push($diagnosa_ids, $diagnose->id);
     });
 
     $('#myDatepicker2').datetimepicker({
-        format: 'DD-MM-YYYY'
+        format: 'DD MMM YYYY'
     });
 
     $('#myDatepicker3').datetimepicker({
-        format: 'DD-MM-YYYY'
+        format: 'DD MMM YYYY'
     });
 </script>
 @stop

@@ -48,12 +48,12 @@
                         <tr>
                             <td width="35%">Tanggal Lahir </td>
                             <td width="1%"> : </td>
-                            <td>{{ date('d-m-Y', strtotime($datas->tgl_lahir)) }}</td>
+                            <td>{{ date('d M Y', strtotime($datas->tgl_lahir)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Tanggal Masuk Yayasan Sayap Ibu </td>
                             <td width="1%"> : </td>
-                            <td>{{ date('d-m-Y', strtotime($datas->tgl_masuk_ysi)) }}</td>
+                            <td>{{ date('d M Y', strtotime($datas->tgl_masuk_ysi)) }}</td>
                         </tr>
                         <tr>
                             <td width="35%">Jenis Kelamin </td>

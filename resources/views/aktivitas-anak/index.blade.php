@@ -43,7 +43,7 @@
                                         <th>No.</th>
                                         <th>Waktu</th>
                                         <th>Kegiatan</th>
-                                        <th>Aksi</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,7 +67,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Aksi
+                                                    Action
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{route('aktivitas-anak.show', $data->id)}}">Detail</a>

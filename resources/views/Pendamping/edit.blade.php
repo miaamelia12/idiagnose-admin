@@ -43,7 +43,11 @@
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
                                 <div class="col-md-6">
-                                    <img width="200" height="200" @if($datas->profil) src="{{ asset('images/pendamping/'.$datas->profil) }}" @endif />
+                                    @if($datas->profil)
+                                    <img src="{{url('images/pendamping/'. $datas->profil)}}" alt="image" class="product" width="200" height="200" />
+                                    @else
+                                    <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
+                                    @endif
                                     <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
                                 </div>
                             </div>

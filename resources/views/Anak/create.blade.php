@@ -55,48 +55,26 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span>
-                                </label>
-                                <!-- <div class="col-md-6 col-sm-6 ">
-                                    <input name="tgl_lahir" id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-                                    <script>
-                                        function timeFunctionLong(input) {
-                                            setTimeout(function() {
-                                                input.type = 'text';
-                                            }, 60000);
-                                        }
-                                    </script>
-                                </div> -->
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker2'>
                                             <input type='text' class="form-control" name="tgl_lahir" placeholder="dd-mm-yyyy" />
                                             <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk Yayasan Sayap Ibu <span class="required">*</span>
-                                </label>
-                                <!-- <div class="col-md-6 col-sm-6 ">
-                                    <input name="tgl_masuk_ysi" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" type="text" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-                                    <script>
-                                        function timeFunctionLong(input) {
-                                            setTimeout(function() {
-                                                input.type = 'text';
-                                            }, 60000);
-                                        }
-                                    </script>
-                                </div> -->
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk Yayasan Sayap Ibu <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <!-- <div class="form-group{{ $errors->has('judul') ? ' has-error' : '' }}"> -->
                                     <div class='input-group date' id='myDatepicker3'>
                                         <input type='text' class="form-control" name="tgl_masuk_ysi" placeholder="dd-mm-yyyy" />
                                         <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                         </span>
                                     </div>
                                     <!-- </div> -->
@@ -210,11 +188,11 @@
         $('.diagnosa').select2();
 
         $('#myDatepicker2').datetimepicker({
-            format: 'DD-MM-YYYY'
+            format: 'DD MMM YYYY'
         });
 
         $('#myDatepicker3').datetimepicker({
-            format: 'DD-MM-YYYY'
+            format: 'DD MMM YYYY'
         });
         // Form Dynamic
         // var i = 1;

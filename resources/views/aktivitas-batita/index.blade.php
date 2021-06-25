@@ -43,7 +43,7 @@
                                         <th>No.</th>
                                         <th>Waktu</th>
                                         <th>Kegiatan</th>
-                                        <th>Aksi</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,9 +54,11 @@
                                         </td>
                                         <td>
                                             @if($data->jam_selesai == "00:00:00")
-                                            {{ $data->jam_mulai }}
+                                            {{ date('H:i', strtotime($data->jam_mulai)) }}
+                                            @elseif(empty($data->jam_selesai))
+                                            {{ date('H:i', strtotime($data->jam_mulai)) }}
                                             @else
-                                            {{ $data->jam_mulai }} - {{ $data->jam_selesai }}
+                                            {{ date('H:i', strtotime($data->jam_mulai)) }} - {{ date('H:i', strtotime($data->jam_selesai)) }}
                                             @endif
                                         </td>
                                         <td>
@@ -65,7 +67,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Aksi
+                                                    Action
                                                 </button>
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="{{route('aktivitas-batita.show', $data->id)}}">Detail</a>

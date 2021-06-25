@@ -28,11 +28,11 @@
                             <td width="1%"> : </td>
                             <td>
                                 @if($datas->jam_selesai == "00:00:00")
-                                {{ $datas->jam_mulai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }}
                                 @elseif(empty($datas->jam_selesai))
-                                {{ $datas->jam_mulai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }}
                                 @else
-                                {{ $datas->jam_mulai }} - {{ $datas->jam_selesai }}
+                                {{ date('H:i', strtotime($datas->jam_mulai)) }} - {{ date('H:i', strtotime($datas->jam_selesai)) }}
                                 @endif
                             </td>
                         </tr>
