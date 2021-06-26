@@ -42,7 +42,7 @@ Route::resource('user', UserController::class);
 Route::delete('/user-delete/{id}', [UserController::class, 'hapus'])->name('user-delete');
 
 Route::resource('anak', AnakController::class);
-Route::delete('/anak-delete/{id}', [AnakController::class, 'hapus'])->name('anak-delete');
+Route::delete('anak-delete/{id}', [AnakController::class, 'hapus'])->name('anak-delete');
 
 Route::resource('diagnosa', DiagnosaController::class);
 Route::get('hapusdiagnosa/{id}', [DiagnosaController::class, 'hapus'])->name('hapusdiagnosa');

@@ -30,78 +30,115 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama">Nama Lengkap <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="nama" type="text" id="nama" value="{{ old('nama') }}" required class="form-control" autofocus>
+                                    @if ($errors->has('nama'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('nama') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="usia" id="usia" hidden>
-                                </div>
-                            </div>
-                            <div class="item form-group">
+
+                            <input name="usia" id="usia" value="{{ old('usia') }}" max="60" hidden>
+
+                            <div class="item form-group{{ $errors->has('berat_badan') ? ' has-error' : '' }}">
                                 <label for="berat_badan" class="col-form-label col-md-3 col-sm-3 label-align">Berat Badan <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="berat_badan" id="berat_badan" class="form-control" type="text" required="required">
+                                <div class="col-md-2 col-sm-2 ">
+                                    <input name="berat_badan" id="berat_badan" class="form-control" type="text" value="{{ old('berat_badan') }}" required="required" min="0">
+                                    @if ($errors->has('berat_badan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('berat_badan') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    kg
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('tinggi_badan') ? ' has-error' : '' }}">
                                 <label for="tinggi_badan" class="col-form-label col-md-3 col-sm-3 label-align">Tinggi Badan <span class="required">*</span></label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" required="required">
+                                <div class="col-md-2 col-sm-2 ">
+                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" value="{{ old('tinggi_badan') }}" required="required" min="0">
+                                    @if ($errors->has('tinggi_badan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('tinggi_badan') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div style="padding-top: 10px;">
+                                    cm
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('tgl_lahir') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Lahir <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker2'>
-                                            <input type='text' class="form-control" name="tgl_lahir" placeholder="dd-mm-yyyy" />
+                                            <input type='text' class="form-control" name="tgl_lahir" value="{{ old('tgl_lahir') }}" placeholder="dd-mm-yyyy" />
                                             <span class="input-group-addon">
                                                 <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
+                                    @if ($errors->has('tgl_lahir'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('tgl_lahir') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('tgl_masuk_ysi') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Masuk Yayasan Sayap Ibu <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <!-- <div class="form-group{{ $errors->has('judul') ? ' has-error' : '' }}"> -->
                                     <div class='input-group date' id='myDatepicker3'>
-                                        <input type='text' class="form-control" name="tgl_masuk_ysi" placeholder="dd-mm-yyyy" />
+                                        <input type='text' class="form-control" name="tgl_masuk_ysi" value="{{ old('tgl_masuk_ysi') }}" placeholder="dd-mm-yyyy" />
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                         </span>
                                     </div>
-                                    <!-- </div> -->
+                                    @if ($errors->has('tgl_masuk_ysi'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('tgl_masuk_ysi') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Kelamin *:</label>
-                                <p class="col-md-6 col-sm-6 ">
+                            <div class="item form-group{{ $errors->has('jk') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Jenis Kelamin :</label>
+                                <p class="col-md-6 col-sm-6" style="padding-top: 10px;">
                                     Laki-laki:
-                                    <input type="radio" class="flat" name="jk" id="genderM" value="Laki-laki" checked="" required /> Perempuan:
+                                    <input type="radio" class="flat" name="jk" id="genderM" value="Laki-laki" checked="" /> Perempuan:
                                     <input type="radio" class="flat" name="jk" id="genderF" value="Perempuan" />
                                 </p>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('IQ') ? ' has-error' : '' }}">
                                 <label for="IQ" class="col-form-label col-md-3 col-sm-3 label-align">IQ</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="IQ" id="IQ" class="form-control" type="number" min="0" name="IQ">
+                                    <input name="IQ" id="IQ" class="form-control" type="number" min="0" value="{{ old('IQ') }}" name="IQ">
+                                    @if ($errors->has('IQ'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('IQ') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('pendidikan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendidikan">Pendidikan
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pendidikan" name="pendidikan" class="form-control">
+                                    <input type="text" id="pendidikan" name="pendidikan" value="{{ old('pendidikan') }}" class="form-control">
+                                    @if ($errors->has('pendidikan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('pendidikan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('diagnosa') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="diagnosa">Diagnosa</label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <select name="diagnosa[]" class="form-control diagnosa" id="diagnosa" multiple="multiple">
@@ -109,6 +146,11 @@
                                         <option value="{{ $item->id }}">{{ $item->nama_diagnosa }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('diagnosa'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('diagnosa') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                                 <!-- <button type="button" class="btn btn-primary btnAdd" data-bs-toggle="modal" data-bs-target="#modal-default">
                                     Tambah Diagnosa
@@ -155,11 +197,16 @@
                                 <!-- </div> -->
                                 <!-- Adding Diagnosa Modal -->
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('kesehatan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kesehatan">Kesehatan <span class="required">*</span>
                                 </label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="kesehatan" id="kesehatan" required="required" autofocus></textarea>
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="kesehatan" id="kesehatan" required="required" value="{{ old('kesehatan') }}" autofocus></textarea>
+                                    @if ($errors->has('kesehatan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('kesehatan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

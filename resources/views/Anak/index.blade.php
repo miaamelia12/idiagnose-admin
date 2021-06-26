@@ -6,8 +6,6 @@
 <link href="{{asset('assets/template/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/template/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{asset('assets/template/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
-<link href="https://cdn.datatables.net/autofill/2.3.7/css/autoFill.dataTables.min.css" rel="stylesheet">
-
 @stop
 
 @extends('layout.backend-dashboard.app')
@@ -41,6 +39,7 @@
                                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th style="display:none;">Id</th>
                                             <th>Nama</th>
                                             <th>Tgl Lahir</th>
                                             <th>Tgl Masuk YSI</th>
@@ -70,8 +69,8 @@
                                                 {{ $data->pendidikan }}
                                             </td>
                                             <td>
-                                                <a class="btn btn-success" href="{{route('anak.edit', $data->id)}}"><i class="fa fa-pencil-square-o"></i></a>
-                                                <button class="btn btn-danger servicedeletebtn" type="button"><i class="fa fa-trash-o"></i></button>
+                                                <a class="btn btn-success" href="{{ route('anak.edit', $data->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                                <button class="btn btn-danger deletebtn"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -104,7 +103,6 @@
 <script src="{{asset('assets/template/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -115,37 +113,9 @@
             }
         });
 
-        var table = $('#datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('anak.index') }}",
-            type: "GET",
-            columns: [{
-                    data: 'id'
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'tgl_lahir'
-                },
-                {
-                    data: 'tgl_masuk_ysi'
-                },
-                {
-                    data: 'jk'
-                },
-                {
-                    data: 'pendidikan'
-                },
-                {
-                    data: 'action'
-                }
-            ],
+        $('#datatable').DataTable();
 
-        });
-
-        $('.servicedeletebtn').click(function(e) {
+        $('#datatable').on('click', '.deletebtn', function(e) {
             e.preventDefault();
 
             var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
@@ -167,7 +137,6 @@
                             url: '/anak-delete/' + delete_id,
                             data: data,
                             success: function(response) {
-                                // $('#datatable').DataTable().ajax.reload();
                                 swal(response.status, {
                                         icon: "success",
                                     })
@@ -175,13 +144,6 @@
                                         location.reload();
                                     });
                             }
-                            // error: function(xhr) {
-                            //     swal({
-                            //         type: 'error',
-                            //         title: 'Oopss...',
-                            //         text: 'Terjadi Kesalahan!'
-                            //     });
-                            // }
                         });
                     }
                 });
@@ -189,6 +151,7 @@
 
     });
 </script>
+
 @stop
 
 @endsection

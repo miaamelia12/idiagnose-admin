@@ -10,7 +10,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AnakController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $datas = Anak::all();
         return view('anak.index', compact('datas'));
@@ -30,6 +30,16 @@ class AnakController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama' => 'required|string|max:255',
+            'berat_badan' => 'required|numeric|min:0',
+            'tinggi_badan' => 'required|numeric|min:0',
+            'tgl_lahir' => 'required|date',
+            'tgl_masuk_ysi' => 'required|date',
+            'pendidikan' => 'required|string|max:255',
+            'kesehatan' => 'required|string|max:255',
+        ]);
+
         $tgl_lahir = $request->get('tgl_lahir');
         $now = Carbon::now();
         $usia = Carbon::parse($tgl_lahir)->diffInMonths($now);
@@ -87,7 +97,7 @@ class AnakController extends Controller
         // $anak->update($request->all());
         $anak->diagnosa()->sync($request->input('diagnosa'));
 
-        return redirect()->route('anak.index');
+        return redirect()->route('anak.index')->with('success', 'Data Anak Berhasil Diupdate!');
     }
 
     public function hapus($id)
