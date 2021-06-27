@@ -9,19 +9,21 @@ use App\Models\Pendamping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\Input;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DaftarKonsultasiController extends Controller
 {
     public function index()
     {
         $datas = DaftarKonsultasi::all();
-        return view('konsultasi.index', compact('datas'));
+        $waiting = DaftarKonsultasi::menunggu();
+        $finish = DaftarKonsultasi::selesai();
+
+        return view('daftar-konsultasi.index', compact('datas', 'waiting', 'finish'));
     }
 
     public function show($id)
     {
-        // $datas = DaftarKonsultasi::findOrFail($id);
         $datas = DB::table('daftar_konsultasi')
             ->leftJoin('anak', 'daftar_konsultasi.anak_id', '=', 'anak.id')
             ->leftJoin('konsultan', 'daftar_konsultasi.konsultan_id', '=', 'konsultan.id')
@@ -32,7 +34,7 @@ class DaftarKonsultasiController extends Controller
             ->leftJoin('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
             ->where('konsultasi_id', $id)->get();
 
-        return view('konsultasi.show', compact('datas', 'pendamping'));
+        return view('daftar-konsultasi.show', compact('datas', 'pendamping'));
     }
 
     public function create()
@@ -40,35 +42,49 @@ class DaftarKonsultasiController extends Controller
         $anak = Anak::all();
         $konsultan = Konsultan::all();
         $pendamping = Pendamping::all();
-        return view('konsultasi.create', compact('anak', 'konsultan', 'pendamping'));
+        return view('daftar-konsultasi.create', compact('anak', 'konsultan', 'pendamping'));
     }
 
     public function store(Request $request)
     {
-        DaftarKonsultasi::create([
-            'anak_id' => $request->get('anak_id'),
-            'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_konsultasi')),
-            'problema' => $request->get('problema'),
-            'konsultan_id' => $request->get('konsultan_id'),
-            'analisis_ahli' => $request->get('analisis_ahli'),
+        $this->validate($request, [
+            'anak_id' => 'required',
+            'tgl_konsultasi' => 'required|date',
+            'problema' => 'required|string|max:255',
+            'konsultan_id' => 'required',
+            'pendamping' => 'required',
         ]);
 
-        $id_konsultasi = DB::getPdo()->lastInsertId();
+        $tgl_konsultasi = $request->get('tgl_konsultasi');
+        $waktu_konsultasi = date('d M Y',  strtotime($tgl_konsultasi));
+        $tahun_ini = date('d M Y');
 
-        $get_pendamping = $request->get('pendamping');
-        for ($i = 0; $i < count($get_pendamping); $i++) {
-            $simpan_pendamping = [
-                'konsultasi_id' => $id_konsultasi,
-                'pendamping_id' => $get_pendamping[$i],
-            ];
-            DB::table('pendamping_konsultasi')->insert($simpan_pendamping);
+        if ($waktu_konsultasi < $tahun_ini) {
+            Alert::error('Oopss..', 'Tanggal Konsultasi Sudah Lalu!');
+            return redirect()->to('daftar-konsultasi/create');
+        } else {
+            DaftarKonsultasi::create([
+                'anak_id' => $request->get('anak_id'),
+                'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $tgl_konsultasi),
+                'problema' => $request->get('problema'),
+                'konsultan_id' => $request->get('konsultan_id'),
+                'analisis_ahli' => $request->get('analisis_ahli'),
+                'status' => $request->get('status'),
+            ]);
+
+            $id_konsultasi = DB::getPdo()->lastInsertId();
+
+            $get_pendamping = $request->get('pendamping');
+            for ($i = 0; $i < count($get_pendamping); $i++) {
+                $simpan_pendamping = [
+                    'konsultasi_id' => $id_konsultasi,
+                    'pendamping_id' => $get_pendamping[$i],
+                ];
+                DB::table('pendamping_konsultasi')->insert($simpan_pendamping);
+            }
+
+            return redirect()->route('daftar-konsultasi.index')->with('success', 'Jadwal Konsultasi Berhasil Ditambahkan!');
         }
-
-        // $input = $request->all();
-        // $konsultasi = DaftarKonsultasi::create($input);
-        // $konsultasi->pendamping()->attach($request->input('pendamping'));
-
-        return redirect()->route('konsultasi.index');
     }
 
     public function edit($id)
@@ -77,47 +93,56 @@ class DaftarKonsultasiController extends Controller
         $anak = Anak::all();
         $konsultan = Konsultan::all();
         $pendamping = Pendamping::all();
-        // $pendamping = DB::table('pendamping_konsultasi')
-        //     ->join('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
-        //     ->where('konsultasi_id', $id)->get();
 
-        return view('konsultasi.edit', compact('datas', 'anak', 'konsultan', 'pendamping'));
+        return view('daftar-konsultasi.edit', compact('datas', 'anak', 'konsultan', 'pendamping'));
     }
 
     public function update(Request $request, $id)
     {
-        // $input = $request->all();
-        // $konsultasi = DaftarKonsultasi::create($input);
-        // $konsultasi->pendamping()->attach($request->input('pendamping'));
-
-        $konsultasi = DaftarKonsultasi::find($id)->update([
-            'anak_id' => $request->get('anak_id'),
-            'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_konsultasi')),
-            'problema' => $request->get('problema'),
-            'konsultan_id' => $request->get('konsultan_id'),
-            'analisis_ahli' => $request->get('analisis_ahli'),
+        $this->validate($request, [
+            'anak_id' => 'required',
+            'tgl_konsultasi' => 'required|date',
+            'problema' => 'required|string|max:255',
+            'konsultan_id' => 'required',
+            'pendamping' => 'required',
         ]);
 
-        $get_pendamping = $request->get('pendamping');
-        DB::table('pendamping_konsultasi')->where('konsultasi_id', $id)->truncate();
-        for ($i = 0; $i < count($get_pendamping); $i++) {
-            $simpan_pendamping = [
-                'konsultasi_id' => $id,
-                'pendamping_id' => $get_pendamping[$i],
-            ];
-            DB::table('pendamping_konsultasi')->insert($simpan_pendamping);
-        }
-        // $input->pendamping()->updateExistingPivot($input->id, $request['pendamping_id']);
-        // $request->all();
-        // $konsultasi->update($request->all());
-        // $konsultasi->pendamping()->sync($request->input('pendamping'));
+        $tgl_konsultasi = $request->get('tgl_konsultasi');
+        $waktu_konsultasi = date('d M Y',  strtotime($tgl_konsultasi));
+        $tahun_ini = date('d M Y');
 
-        return redirect()->route('konsultasi.index');
+        if ($waktu_konsultasi < $tahun_ini) {
+            Alert::error('Oopss..', 'Tanggal Konsultasi Sudah Lalu!');
+            return redirect()->to('daftar-konsultasi');
+        } else {
+            DaftarKonsultasi::find($id)->update([
+                'anak_id' => $request->get('anak_id'),
+                'tgl_konsultasi' => Carbon::createFromFormat('d M Y',  $request->get('tgl_konsultasi')),
+                'problema' => $request->get('problema'),
+                'konsultan_id' => $request->get('konsultan_id'),
+                'analisis_ahli' => $request->get('analisis_ahli'),
+                'status' => $request->get('status'),
+            ]);
+
+            $get_pendamping = $request->get('pendamping');
+            DB::table('pendamping_konsultasi')->where('konsultasi_id', $id)->truncate();
+            for ($i = 0; $i < count($get_pendamping); $i++) {
+                $simpan_pendamping = [
+                    'konsultasi_id' => $id,
+                    'pendamping_id' => $get_pendamping[$i],
+                ];
+                DB::table('pendamping_konsultasi')->insert($simpan_pendamping);
+            }
+
+            return redirect()->route('daftar-konsultasi.index')->with('success', 'Jadwal Konsultasi Berhasil Diupdate!');
+        }
     }
 
     public function hapus($id)
     {
-        DaftarKonsultasi::findOrFail($id)->delete();
-        return redirect()->route('konsultasi.index');
+        $konsultasi = DaftarKonsultasi::findOrFail($id);
+        $konsultasi->delete();
+
+        return response()->json(['status' => 'Data Berhasil Terhapus!']);
     }
 }

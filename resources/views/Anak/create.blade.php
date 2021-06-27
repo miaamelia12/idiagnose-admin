@@ -8,6 +8,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -47,7 +49,7 @@
 
                             <div class="item form-group{{ $errors->has('berat_badan') ? ' has-error' : '' }}">
                                 <label for="berat_badan" class="col-form-label col-md-3 col-sm-3 label-align">Berat Badan <span class="required">*</span></label>
-                                <div class="col-md-2 col-sm-2 ">
+                                <div class="col-md-6 col-sm-6 ">
                                     <input name="berat_badan" id="berat_badan" class="form-control" type="text" value="{{ old('berat_badan') }}" required="required" min="0">
                                     @if ($errors->has('berat_badan'))
                                     <span class="red">
@@ -61,7 +63,7 @@
                             </div>
                             <div class="item form-group{{ $errors->has('tinggi_badan') ? ' has-error' : '' }}">
                                 <label for="tinggi_badan" class="col-form-label col-md-3 col-sm-3 label-align">Tinggi Badan <span class="required">*</span></label>
-                                <div class="col-md-2 col-sm-2 ">
+                                <div class="col-md-6 col-sm-6 ">
                                     <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" value="{{ old('tinggi_badan') }}" required="required" min="0">
                                     @if ($errors->has('tinggi_badan'))
                                     <span class="red">
@@ -127,10 +129,10 @@
                                 </div>
                             </div>
                             <div class="item form-group{{ $errors->has('pendidikan') ? ' has-error' : '' }}">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendidikan">Pendidikan
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendidikan">Pendidikan <span class="required">*</span></label>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pendidikan" name="pendidikan" value="{{ old('pendidikan') }}" class="form-control">
+                                    <input type="text" id="pendidikan" name="pendidikan" value="{{ old('pendidikan') }}" class="form-control" required>
                                     @if ($errors->has('pendidikan'))
                                     <span class="red">
                                         <strong>{{ $errors->first('pendidikan') }}</strong>

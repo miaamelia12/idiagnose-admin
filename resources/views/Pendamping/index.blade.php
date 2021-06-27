@@ -3,6 +3,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -25,9 +27,11 @@
                         @foreach($datas as $data)
                         <div class="col-md-3   widget widget_tally_box">
                             <div class="x_panel" style="height: 350px;">
+                                <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                <p style="display:none;">{{ $data->id }}</p>
                                 <a href="{{route('pendamping.edit', $data->id)}}"><i class="fa fa-pencil"></i></a>
                                 <div class="pull-right top_search">
-                                    <a href="{{route('hapuspendamping', $data->id)}}"><i class="fa fa-close"></i></a>
+                                    <a class="servicedeletebtn"><i class="fa fa-close"></i></a>
                                 </div>
                                 <div class="x_content">
                                     @if($data->profil)
@@ -51,4 +55,54 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.servicedeletebtn').click(function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest(".x_panel").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/pendamping-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
+@stop
+
 @endsection

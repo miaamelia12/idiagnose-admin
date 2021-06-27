@@ -8,6 +8,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -17,7 +19,7 @@
 
     <div class="clearfix"></div>
 
-    <form method="POST" id="validate_form" action="{{route('konsultasi.store')}}" enctype="multipart/form-data">
+    <form method="POST" id="validate_form" action="{{route('daftar-konsultasi.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
@@ -30,68 +32,102 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="anak_id">Nama Anak</label>
+                            <div class="item form-group{{ $errors->has('anak_id') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="anak_id">Nama Anak <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="anak_id" class="form-control select1" id="anak_id">
+                                    <select name="anak_id" class="form-control select1" id="anak_id" required autofocus>
                                         <option></option>
                                         @foreach ($anak as $an)
                                         <option value="{{ $an->id }}">{{ $an->nama }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('anak_id'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('anak_id') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Konsultasi <span class="required">*</span>
-                                </label>
+                            <div class="item form-group{{ $errors->has('tgl_konsultasi') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Konsultasi <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker2'>
-                                            <input type='text' class="form-control" name="tgl_konsultasi" placeholder="dd-mm-yyyy" />
+                                            <input type='text' class="form-control" name="tgl_konsultasi" placeholder="dd-mm-yyyy" value="{{ old('tgl_konsultasi') }}" required autofocus />
                                             <span class="input-group-addon">
                                                 <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
                                         </div>
                                     </div>
+                                    @if ($errors->has('tgl_konsultasi'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('tgl_konsultasi') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label for="problema" class="col-form-label col-md-3 col-sm-3 label-align">Problema</label>
+                            <div class="item form-group{{ $errors->has('problema') ? ' has-error' : '' }}">
+                                <label for="problema" class="col-form-label col-md-3 col-sm-3 label-align">Problema <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="problema" id="problema" class="form-control" type="text" name="problema">
+                                    <input name="problema" id="problema" class="form-control" type="text" name="problema" value="{{ old('problema') }}" required autofocus>
+                                    @if ($errors->has('problema'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('problema') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="konsultan_id">Konsultan</label>
+                            <div class="item form-group{{ $errors->has('konsultan_id') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="konsultan_id">Konsultan <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="konsultan_id" class="form-control select1" id="konsultan_id">
+                                    <select name="konsultan_id" class="form-control select1" id="konsultan_id" required autofocus>
                                         <option></option>
                                         @foreach ($konsultan as $k)
                                         <option value="{{ $k->id }}">{{ $k->nama_konsultan }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('konsultan_id'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('konsultan_id') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendamping">Pendamping</label>
+                            <div class="item form-group{{ $errors->has('pendamping') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendamping">Pendamping <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="pendamping[]" class="form-control select" id="pendamping" multiple="multiple">
+                                    <select name="pendamping[]" class="form-control select" id="pendamping" multiple="multiple" required autofocus>
                                         @foreach ($pendamping as $p)
                                         <option value="{{ $p->id }}">{{ $p->nama_pendamping }}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->has('pendamping'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('pendamping') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="item form-group{{ $errors->has('analisis_ahli') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="analisis_ahli">Analisis Ahli</label>
+                                <div class="col-md-9 col-sm-9 ">
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="analisis_ahli" id="analisis_ahli" value="{{ old('analisis_ahli') }}" autofocus></textarea>
+                                    @if ($errors->has('analisis_ahli'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('analisis_ahli') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="analisis_ahli">Analisis Ahli</label>
-                                <div class="col-md-9 col-sm-9 ">
-                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="analisis_ahli" id="analisis_ahli" required="required" autofocus></textarea>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input name="status" type="hidden" id="status" class="form-control" value="Menunggu">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <a href="{{route('konsultasi.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
+                                    <a href="{{route('daftar-konsultasi.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>

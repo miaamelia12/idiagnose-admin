@@ -22,36 +22,38 @@ class ProfilController extends Controller
         ]);
     }
 
-    public function update(UpdateProfileRequest $request)
+    public function update(Request $request)
     {
-        $request->user()->update(
-            $request->all()
-        );
-        // $id = Auth::user()->id;
-        // $user_data = User::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'password' => 'required',
+        ]);
 
-        // if ($request->file('gambar')) {
-        //     $file = $request->file('gambar');
-        //     $dt = Carbon::now();
-        //     $acak  = $file->getClientOriginalExtension();
-        //     $fileName = rand(11111, 99999) . '-' . $dt->format('Y-m-d-H-i-s') . '.' . $acak;
-        //     $request->file('gambar')->move("images/user", $fileName);
-        //     $user_data->gambar = $fileName;
-        // }
+        $id = Auth::user()->id;
+        $user_data = User::findOrFail($id);
 
-        // $user_data->name = $request->input('name');
-        // $user_data->username = $request->input('username');
-        // $user_data->email = $request->input('email');
-        // if ($request->input('password')) {
-        //     $user_data->level = $request->input('level');
-        // }
+        if ($request->file('gambar')) {
+            $file = $request->file('gambar');
+            $dt = Carbon::now();
+            $acak  = $file->getClientOriginalExtension();
+            $fileName = rand(11111, 99999) . '-' . $dt->format('Y-m-d-H-i-s') . '.' . $acak;
+            $request->file('gambar')->move("images/user", $fileName);
+            $user_data->gambar = $fileName;
+        }
 
-        // if ($request->input('password')) {
-        //     $user_data->password = bcrypt(($request->input('password')));
-        // }
+        $user_data->name = $request->input('name');
+        $user_data->username = $request->input('username');
+        $user_data->email = $request->input('email');
+        if ($request->input('password')) {
+            $user_data->level = $request->input('level');
+        }
 
-        // $user_data->update();
+        if ($request->input('password')) {
+            $user_data->password = bcrypt(($request->input('password')));
+        }
 
-        return redirect()->to('profil.index')->with('success', 'Profil Berhasil Diupdate!');
+        $user_data->update();
+
+        return redirect()->to('profil')->with('success', 'Profil Berhasil Diupdate!');
     }
 }

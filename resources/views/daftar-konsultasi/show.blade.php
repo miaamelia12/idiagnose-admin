@@ -70,11 +70,22 @@
                             <td width="1%"> : </td>
                             <td>{{ $datas->analisis_ahli }}</td>
                         </tr>
+                        <tr>
+                            <td width="35%">Status </td>
+                            <td width="1%"> : </td>
+                            <td>
+                                @if($datas->status == "Selesai")
+                                <span class="badge badge-success">{{ $datas->status }}</span>
+                                @elseif($datas->status == "Menunggu")
+                                <span class="badge badge-warning">{{ $datas->status }}</span>
+                                @endif
+                            </td>
+                        </tr>
                     </table>
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" onclick="window.location='{{ route("konsultasi.index")}}'" class="btn btn-secondary">Kembali</button>
+                            <button type="submit" onclick="window.location='{{ route("daftar-konsultasi.index")}}'" class="btn btn-secondary">Kembali</button>
                         </div>
                     </div>
                 </div>

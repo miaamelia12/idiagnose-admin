@@ -35,26 +35,26 @@
                     <li><a><i class="fa fa-clone"></i> Master Data <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="nav-item">
-                                <a href="{{route('anak.index')}}" class="nav-link {{ setActive(['anak*']) }}"> Data Anak</a>
+                                <a href="{{ route('anak.index') }}" class="nav-link {{ setActive(['anak*']) }}"> Data Anak</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('pendamping.index')}}" class="nav-link {{ setActive(['pendamping*']) }}"> Data Pendamping</a>
+                                <a href="{{ route('pendamping.index') }}" class="nav-link {{ setActive(['pendamping*']) }}"> Data Pendamping</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('konsultan.index')}}" class="nav-link {{ setActive(['konsultan*']) }}"> Data Konsultan</a>
+                                <a href="{{ route('konsultan.index') }}" class="nav-link {{ setActive(['konsultan*']) }}"> Data Konsultan</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('user.index')}}" class="nav-link {{ setActive(['user*']) }}"> Data User</a>
+                                <a href="{{ route('user.index') }}" class="nav-link {{ setActive(['user*']) }}"> Data User</a>
                             </li>
                         </ul>
                     </li>
                     <li><a><i class="fa fa-calendar"></i> Jadwal Aktivitas <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="nav-item">
-                                <a href="{{route('aktivitas-batita.index')}}" class="nav-link {{ setActive(['aktivitas-batita*']) }}"> Batita</a>
+                                <a href="{{ route('aktivitas-batita.index') }}" class="nav-link {{ setActive(['aktivitas-batita*']) }}"> Batita</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('aktivitas-balita.index')}}" class="nav-link {{ setActive(['aktivitas-balita*']) }}"> Balita</a>
+                                <a href="{{ route('aktivitas-balita.index') }}" class="nav-link {{ setActive(['aktivitas-balita*']) }}"> Balita</a>
                             </li>
                             <!-- <li class="nav-item">
                                 <a href="{{route('aktivitas-anak.index')}}" class="nav-link {{ setActive(['aktivitas-anak*']) }}"> Anak-anak</a>
@@ -66,14 +66,14 @@
                     @if(Auth::user()->level == 'Admin')
                     <li><a><i class="fa fa-stethoscope"></i> Prediksi Stunting <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{route('data-sampel.index')}}" class="nav-link {{ setActive(['data-sampel*']) }}">Data Sampel</a></li>
-                            <li><a href="{{route('prediksi-stunting.index')}}" class="nav-link {{ setActive(['prediksi-stunting*']) }}">Prediksi</a></li>
+                            <li class="sub_menu"><a href="{{ route('data-sampel.index') }}" class="nav-link {{ setActive(['data-sampel*']) }}">Data Sampel</a></li>
+                            <li><a href="{{ route('prediksi-stunting.index') }}" class="nav-link {{ setActive(['prediksi-stunting*']) }}">Prediksi</a></li>
                             <!-- <li><a href="{{route('riwayat-prediksi.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Riwayat Prediksi</a></li> -->
                         </ul>
                     </li>
                     @else
                     <li>
-                        <a href="{{route('prediksi-stunting.index')}}" class="nav-link {{ setActive(['prediksi-stunting*']) }}"><i class="fa fa-stethoscope"></i>Prediksi</a>
+                        <a href="{{ route('prediksi-stunting.index') }}" class="nav-link {{ setActive(['prediksi-stunting*']) }}"><i class="fa fa-stethoscope"></i>Prediksi</a>
                     </li>
                     @endif
 
@@ -81,10 +81,10 @@
                     <li><a><i class="fa fa-clipboard"></i> Perkembangan Anak <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li class="nav-item">
-                                <a href="{{route('diagnosa.index')}}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}">Daftar Diagnosa</a>
+                                <a href="{{ route('diagnosa.index') }}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}">Daftar Diagnosa</a>
                             </li>
                             <li>
-                                <a href="{{route('konsultasi.index')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Daftar Konsultasi</a>
+                                <a href="{{ route('daftar-konsultasi.index') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Daftar Konsultasi</a>
                             </li>
                         </ul>
                     </li>

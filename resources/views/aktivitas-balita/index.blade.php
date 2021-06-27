@@ -13,6 +13,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -40,6 +42,7 @@
                             <table id="datatable" class="table" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th style="display:none;">Id</th>
                                         <th>No.</th>
                                         <th>Waktu</th>
                                         <th>Kegiatan</th>
@@ -49,6 +52,8 @@
                                 <tbody>
                                     @foreach($datas as $i => $data)
                                     <tr>
+                                        <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                        <td style="display:none;">{{ $data->id }}</td>
                                         <td>
                                             {{ ++$i }}
                                         </td>
@@ -65,16 +70,9 @@
                                             {{ $data->kegiatan }}
                                         </td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    Action
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.show', $data->id)}}">Detail</a>
-                                                    <a class="dropdown-item" href="{{route('aktivitas-balita.edit', $data->id)}}">Edit</a>
-                                                    <a class="dropdown-item" href="{{route('hapusbalita', $data->id)}}">Hapus</a>
-                                                </div>
-                                            </div>
+                                            <a class="btn btn-info" href="{{ route('aktivitas-balita.show', $data->id) }}"><i class="fa fa-eye"></i></a>
+                                            <a class="btn btn-success" href="{{ route('aktivitas-balita.edit', $data->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                            <button class="btn btn-danger deletebtn"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -102,6 +100,56 @@
 <script src="{{asset('assets/template/vendors/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
 <script src="{{asset('assets/template/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#datatable').DataTable();
+
+        $('#datatable').on('click', '.deletebtn', function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/aktivitas-balita-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
+
 @stop
 
 @endsection

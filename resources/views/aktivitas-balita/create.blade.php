@@ -30,46 +30,73 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('kegiatan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kegiatan">Kegiatan <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="kegiatan" type="text" id="kegiatan" required class="form-control" autofocus>
-                                </div>
-                            </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="jam_mulai">Jam Mulai <span class="required">*</span></label>
-                                <div class='input-group date col-md-6 col-sm-6' id='myDatepicker3'>
-                                    <input type='text' class="form-control" name="jam_mulai" required />
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
+                                    <input name="kegiatan" type="text" id="kegiatan" value="{{ old('kegiatan') }}" required class="form-control" autofocus>
+                                    @if ($errors->has('kegiatan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('kegiatan') }}</strong>
                                     </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="jam_selesai">Jam Selesai</label>
-                                <div class='input-group date col-md-6 col-sm-6' id='myDatepicker4'>
-                                    <input type='text' class="form-control" name="jam_selesai" />
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
+                            <div class="item form-group{{ $errors->has('jam_mulai') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Jam Mulai <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='myDatepicker3'>
+                                            <input type='text' class="form-control" name="jam_mulai" value="{{ old('jam_mulai') }}" required autofocus />
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('jam_mulai'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('jam_mulai') }}</strong>
                                     </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('jam_selesai') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Jam Selesai</label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <div class="form-group">
+                                        <div class='input-group date' id='myDatepicker4'>
+                                            <input type='text' class="form-control" name="jam_selesai" value="{{ old('jam_selesai') }}" autofocus />
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-clock-o" style="margin-top: 5px;"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('jam_selesai'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('jam_selesai') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="item form-group{{ $errors->has('keterangan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="keterangan">Keterangan</label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="keterangan" type="text" id="keterangan" class="form-control" autofocus>
+                                    <input name="keterangan" type="text" id="keterangan" value="{{ old('keterangan') }}" class="form-control" autofocus>
+                                    @if ($errors->has('keterangan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('keterangan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="kategori_aktivitas" type="text" id="kategori_aktivitas" class="form-control" value="Balita" hidden>
+                                    <input name="kategori_aktivitas" type="hidden" id="kategori_aktivitas" class="form-control" value="Balita">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
                                     <a href="{{route('aktivitas-balita.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>

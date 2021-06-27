@@ -21,6 +21,12 @@ class PendampingController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_pendamping' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'profil' => 'image',
+        ]);
+
         if ($request->file('profil')) {
             $file = $request->file('profil');
             $dt = Carbon::now();
@@ -38,7 +44,7 @@ class PendampingController extends Controller
             'profil' => $profil
         ]);
 
-        return redirect()->route('pendamping.index');
+        return redirect()->route('pendamping.index')->with('success', 'Data Pendamping Berhasil Ditambahkan!');
     }
 
     public function edit($id)
@@ -50,6 +56,12 @@ class PendampingController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_pendamping' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'profil' => 'image',
+        ]);
+
         if ($request->file('profil')) {
             $file = $request->file('profil');
             $dt = Carbon::now();
@@ -67,12 +79,14 @@ class PendampingController extends Controller
             'profil' => $profil
         ]);
 
-        return redirect()->route('pendamping.index');
+        return redirect()->route('pendamping.index')->with('success', 'Data Pendamping Berhasil Diupdate!');
     }
 
     public function hapus($id)
     {
-        Pendamping::findOrFail($id)->delete();
-        return redirect()->route('pendamping.index');
+        $pendamping = Pendamping::findOrFail($id);
+        $pendamping->delete();
+
+        return response()->json(['status' => 'Data Pendamping Berhasil Terhapus!']);
     }
 }

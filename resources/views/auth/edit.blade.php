@@ -31,14 +31,14 @@
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Profil</label>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
                                 <div class="col-md-6">
-                                    @if($datas->gambar)
-                                    <img src="{{url('images/user/'. $datas->gambar)}}" alt="image" class="product" width="200" height="200" />
+                                    @if($datas->profil)
+                                    <img src="{{url('images/user/'. $datas->profil)}}" alt="image" class="product" width="200" height="200" />
                                     @else
                                     <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
                                     @endif
-                                    <input type="file" class="uploads" style="margin-top: 20px;" name="gambar">
+                                    <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -62,7 +62,6 @@
                                     <input name="email" type="text" id="email" required="required" class="form-control" readonly="" value="{{ $datas->email }}">
                                 </div>
                             </div>
-                            @if(Auth::user()->level == 'Admin')
                             <div class="item form-group{{ $errors->has('level') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="level">Level <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -71,10 +70,13 @@
                                         <option value="Admin" @if($datas->level == 'Admin') selected @endif>Admin</option>
                                         <option value="Perawat" @if($datas->level == 'Perawat') selected @endif>Perawat</option>
                                     </select>
+                                    @if ($errors->has('level'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('level') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            @endif
-
                             <div class="item form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
                                 </label>

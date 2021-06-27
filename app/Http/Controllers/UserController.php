@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -39,18 +40,20 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:20|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
+            'level' => 'required|in:Admin,Perawat',
+            'profil' => 'image',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        if ($request->file('gambar')) {
-            $file = $request->file('gambar');
+        if ($request->file('profil')) {
+            $file = $request->file('profil');
             $dt = Carbon::now();
             $acak = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '-' . $dt->format('Y-m-d-H-i-s') . '.' . $acak;
-            $request->file('gambar')->move("images/user", $fileName);
-            $gambar = $fileName;
+            $request->file('profil')->move("images/user", $fileName);
+            $profil = $fileName;
         } else {
-            $gambar = NULL;
+            $profil = NULL;
         }
 
         User::create([
@@ -59,7 +62,7 @@ class UserController extends Controller
             'email' => $request->input('email'),
             'level' => $request->input('level'),
             'password' => bcrypt(($request->input('password'))),
-            'gambar' => $gambar
+            'profil' => $profil
         ]);
 
         return redirect()->route('user.index')->with('success', 'User Berhasil Terdaftar!');
@@ -83,13 +86,13 @@ class UserController extends Controller
     {
         $user_data = User::findOrFail($id);
 
-        if ($request->file('gambar')) {
-            $file = $request->file('gambar');
+        if ($request->file('profil')) {
+            $file = $request->file('profil');
             $dt = Carbon::now();
             $acak  = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '-' . $dt->format('Y-m-d-H-i-s') . '.' . $acak;
-            $request->file('gambar')->move("images/user", $fileName);
-            $user_data->gambar = $fileName;
+            $request->file('profil')->move("images/user", $fileName);
+            $user_data->profil = $fileName;
         }
 
         $user_data->name = $request->input('name');

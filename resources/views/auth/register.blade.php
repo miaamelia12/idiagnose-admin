@@ -65,11 +65,16 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Profil</label>
+                            <div class="item form-group{{ $errors->has('profil') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
                                 <div class="col-md-6">
                                     <img width="200" height="200" />
-                                    <input type="file" class="uploads" style="margin-top: 20px;" name="gambar">
+                                    <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
+                                    @if ($errors->has('profil'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('profil') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="item form-group{{ $errors->has('level') ? ' has-error' : '' }}">
@@ -80,6 +85,11 @@
                                         <option value="Admin">Admin</option>
                                         <option value="Perawat">Perawat</option>
                                     </select>
+                                    @if ($errors->has('level'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('level') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="item form-group{{ $errors->has('password') ? ' has-error' : '' }}">

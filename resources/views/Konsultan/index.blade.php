@@ -13,6 +13,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -37,6 +39,7 @@
                                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th style="display:none;">Id</th>
                                             <th>Nama Dokter</th>
                                             <th>Spesialis</th>
                                             <th>Rumah Sakit</th>
@@ -46,19 +49,14 @@
                                     <tbody>
                                         @foreach($datas as $data)
                                         <tr>
-                                            <td>{{$data->nama_konsultan}}</td>
-                                            <td>{{$data->spesialis}}</td>
-                                            <td>{{$data->rumah_sakit}}</td>
+                                            <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                            <td style="display:none;">{{ $data->id }}</td>
+                                            <td>{{ $data->nama_konsultan }}</td>
+                                            <td>{{ $data->spesialis }}</td>
+                                            <td>{{ $data->rumah_sakit }}</td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('konsultan.edit', $data->id)}}">Edit</a>
-                                                        <a class="dropdown-item" href="{{route('hapuskonsultan', $data->id)}}">Hapus</a>
-                                                    </div>
-                                                </div>
+                                                <a class="btn btn-success" href="{{ route('konsultan.edit', $data->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                                <button class="btn btn-danger deletebtn"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -90,6 +88,55 @@
 <script src="{{asset('assets/template/vendors/jszip/dist/jszip.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-@show
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#datatable').DataTable();
+
+        $('#datatable').on('click', '.deletebtn', function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/konsultan-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
+@stop
 
 @endsection

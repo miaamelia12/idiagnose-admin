@@ -25,25 +25,40 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('nama_pendamping') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_pendamping">Nama Pendamping <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="nama_pendamping" type="text" id="nama_pendamping" value="{{ old('nama_pendamping') }}" required class="form-control" autofocus>
+                                    @if ($errors->has('nama_pendamping'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('nama_pendamping') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('jabatan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="jabatan">Jabatan <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="jabatan" type="text" id="jabatan" required="required" class="form-control" autofocus>
+                                    <input name="jabatan" type="text" id="jabatan" required="required" value="{{ old('jabatan') }}" class="form-control" autofocus>
+                                    @if ($errors->has('jabatan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('jabatan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('profil') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Profil</label>
                                 <div class="col-md-6">
                                     <img width="200" height="200" />
                                     <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
+                                    @if ($errors->has('profil'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('profil') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

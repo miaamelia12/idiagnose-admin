@@ -25,32 +25,46 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_konsultan">Nama Dokter <span class="required">*</span>
+                            <div class="item form-group{{ $errors->has('nama_konsultan') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_konsultan">Nama Konsultan <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="nama_konsultan" type="text" id="nama_konsultan" value="{{ old('nama_konsultan') }}" required class="form-control" autofocus>
+                                    <input name="nama_konsultan" type="text" id="nama_konsultan" value="{{ old('nama_konsultan') }}" required="required" class="form-control" autofocus>
+                                    @if ($errors->has('nama_konsultan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('nama_konsultan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('spesialis') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="spesialis">Spesialis <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="spesialis" type="text" id="spesialis" required="required" class="form-control" autofocus>
+                                    <input name="spesialis" type="text" id="spesialis" required="required" value="{{ old('spesialis') }}" class="form-control" autofocus>
+                                    @if ($errors->has('spesialis'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('spesialis') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('rumah_sakit') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="rumah_sakit">Rumah Sakit <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="rumah_sakit" type="text" id="rumah_sakit" required="required" class="form-control" autofocus>
+                                    <input name="rumah_sakit" type="text" id="rumah_sakit" required="required" value="{{ old('rumah_sakit') }}" class="form-control" autofocus>
+                                    @if ($errors->has('rumah_sakit'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('rumah_sakit') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
                                     <a href="{{route('konsultan.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
-                                    <button class="btn btn-primary" type="reset">Reset</button>
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>

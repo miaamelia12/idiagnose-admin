@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card-box table-responsive">
-                                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                                <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
@@ -70,7 +70,6 @@
                                                 <span class="badge badge-danger">{{ $data->status }}</span>
                                                 @endif
                                             </td>
-                                            <!-- <td>{{ $data->status }}</td> -->
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -26,25 +26,40 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('nama_konsultan') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_konsultan">Nama Dokter <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="nama_konsultan" type="text" id="nama_konsultan" required="required" class="form-control" autofocus value="{{ $datas->nama_konsultan }}">
+                                    @if ($errors->has('nama_konsultan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('nama_konsultan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('spesialis') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="spesialis">Spesialis <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="spesialis" type="text" id="spesialis" required="required" class="form-control" autofocus value="{{ $datas->spesialis }}">
+                                    @if ($errors->has('spesialis'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('spesialis') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('rumah_sakit') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="rumah_sakit">Rumah Sakit <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="rumah_sakit" type="text" id="rumah_sakit" required="required" class="form-control" autofocus value="{{ $datas->rumah_sakit }}">
+                                    @if ($errors->has('rumah_sakit'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('rumah_sakit') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

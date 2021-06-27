@@ -29,15 +29,23 @@ class AktivitasBalitaController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'kegiatan' => 'required|string|max:255',
+            'jam_mulai' => 'date_format:H:i',
+        ]);
+
+        $jam_mulai = $request->get('jam_mulai');
+        $jam_selesai = $request->get('jam_selesai');
+
         JadwalAktivitas::create([
             'kegiatan' => $request->get('kegiatan'),
-            'jam_mulai' => Carbon::createFromFormat('h:i',  $request->get('jam_mulai')),
-            'jam_selesai' => Carbon::createFromFormat('h:i',  $request->get('jam_selesai')),
+            'jam_mulai' => date('H:i',  strtotime($jam_mulai)),
+            'jam_selesai' => date('H:i',  strtotime($jam_selesai)),
             'keterangan' => $request->get('keterangan'),
             'kategori_aktivitas' => $request->get('kategori_aktivitas'),
         ]);
 
-        return redirect()->route('aktivitas-balita.index');
+        return redirect()->route('aktivitas-balita.index')->with('success', 'Aktivitas Berhasil Ditambahkan!');
     }
 
     public function edit($id)
@@ -49,21 +57,30 @@ class AktivitasBalitaController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'kegiatan' => 'required|string|max:255',
+            'jam_mulai' => 'date_format:H:i',
+        ]);
+
+        $jam_mulai = $request->get('jam_mulai');
+        $jam_selesai = $request->get('jam_selesai');
+
         JadwalAktivitas::find($id)->update([
             'kegiatan' => $request->get('kegiatan'),
-            'jam_mulai' => Carbon::createFromFormat('h:i',  $request->get('jam_mulai')),
-            'jam_selesai' => Carbon::createFromFormat('h:i',  $request->get('jam_selesai')),
+            'jam_mulai' => date('H:i',  strtotime($jam_mulai)),
+            'jam_selesai' => date('H:i',  strtotime($jam_selesai)),
             'keterangan' => $request->get('keterangan'),
             'kategori_aktivitas' => $request->get('kategori_aktivitas'),
         ]);
 
-        return redirect()->route('aktivitas-balita.index');
+        return redirect()->route('aktivitas-balita.index')->with('success', 'Aktivitas Berhasil Diupdate!');
     }
 
     public function hapus($id)
     {
-        JadwalAktivitas::findOrFail($id)->delete();
+        $balita = JadwalAktivitas::findOrFail($id);
+        $balita->delete();
 
-        return redirect()->route('aktivitas-balita.index');
+        return response()->json(['status' => 'Data Berhasil Terhapus!']);
     }
 }

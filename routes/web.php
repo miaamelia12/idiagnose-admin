@@ -11,6 +11,7 @@ use App\Http\Controllers\DataTestingController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\KonsultanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendampingController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RiwayatPrediksiController;
@@ -39,7 +40,7 @@ Route::get('/home', [DashboardController::class, 'index'])->name('home');
 Route::get('/', [DashboardController::class, 'index']);
 
 Route::resource('user', UserController::class);
-Route::delete('/user-delete/{id}', [UserController::class, 'hapus'])->name('user-delete');
+Route::delete('user-delete/{id}', [UserController::class, 'hapus'])->name('user-delete');
 
 Route::resource('anak', AnakController::class);
 Route::delete('anak-delete/{id}', [AnakController::class, 'hapus'])->name('anak-delete');
@@ -48,13 +49,13 @@ Route::resource('diagnosa', DiagnosaController::class);
 Route::get('hapusdiagnosa/{id}', [DiagnosaController::class, 'hapus'])->name('hapusdiagnosa');
 
 Route::resource('pendamping', PendampingController::class);
-Route::get('hapuspendamping/{id}', [PendampingController::class, 'hapus'])->name('hapuspendamping');
+Route::delete('pendamping-delete/{id}', [PendampingController::class, 'hapus'])->name('pendamping-delete');
 
 Route::resource('konsultan', KonsultanController::class);
-Route::get('hapuskonsultan/{id}', [KonsultanController::class, 'hapus'])->name('hapuskonsultan');
+Route::delete('konsultan-delete/{id}', [KonsultanController::class, 'hapus'])->name('konsultan-delete');
 
-Route::resource('konsultasi', DaftarKonsultasiController::class);
-Route::get('hapuskonsultasi/{id}', [DaftarKonsultasiController::class, 'hapus'])->name('hapuskonsultasi');
+Route::resource('daftar-konsultasi', DaftarKonsultasiController::class);
+Route::delete('konsultasi-delete/{id}', [DaftarKonsultasiController::class, 'hapus'])->name('konsultasi-delete');
 
 Route::resource('riwayat-prediksi', RiwayatPrediksiController::class);
 
@@ -68,10 +69,10 @@ Route::get('get/details/{id}', [DataTestingController::class, 'getDetails'])->na
 Route::get('hasil', [DataTestingController::class, 'hitung'])->name('hasil');
 
 Route::resource('aktivitas-batita', AktivitasBatitaController::class);
-Route::get('hapusbatita/{id}', [AktivitasBatitaController::class, 'hapus'])->name('hapusbatita');
+Route::delete('aktivitas-batita-delete/{id}', [AktivitasBatitaController::class, 'hapus'])->name('aktivitas-batita-delete');
 
 Route::resource('aktivitas-balita', AktivitasBalitaController::class);
-Route::get('hapusbalita/{id}', [AktivitasBalitaController::class, 'hapus'])->name('hapusbalita');
+Route::delete('aktivitas-balita-delete/{id}', [AktivitasBalitaController::class, 'hapus'])->name('aktivitas-balita-delete');
 
 Route::resource('aktivitas-anak', AktivitasAnakController::class);
 Route::get('hapusaktivitasanak/{id}', [AktivitasAnakController::class, 'hapus'])->name('hapusaktivitasanak');

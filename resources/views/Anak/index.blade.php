@@ -69,6 +69,7 @@
                                                 {{ $data->pendidikan }}
                                             </td>
                                             <td>
+                                                <a class="btn btn-info" href="{{ route('anak.show', $data->id) }}"><i class="fa fa-eye"></i></a>
                                                 <a class="btn btn-success" href="{{ route('anak.edit', $data->id) }}"><i class="fa fa-pencil-square-o"></i></a>
                                                 <button class="btn btn-danger deletebtn"><i class="fa fa-trash-o"></i></button>
                                             </td>

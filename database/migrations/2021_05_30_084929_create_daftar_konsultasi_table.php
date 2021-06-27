@@ -15,9 +15,10 @@ class CreateDaftarKonsultasiTable extends Migration
     {
         Schema::create('daftar_konsultasi', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('tgl_konsultasi')->nullable();
+            $table->date('tgl_konsultasi');
             $table->string('problema');
-            $table->longText('analisis_ahli');
+            $table->longText('analisis_ahli')->nullable();
+            $table->enum('status', ['Menunggu', 'Selesai']);
             $table->unsignedBigInteger('anak_id')->index();
             $table->foreign('anak_id')->references('id')->on('anak')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('konsultan_id')->index();

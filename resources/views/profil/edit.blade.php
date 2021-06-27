@@ -30,7 +30,7 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('gambar') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Foto Profil</label>
                                 <div class="col-md-6">
                                     @if($user->gambar)
@@ -39,39 +39,61 @@
                                     <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
                                     @endif
                                     <input type="file" class="uploads" style="margin-top: 20px;" name="gambar">
+                                    @if ($errors->has('gambar'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('gambar') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Nama <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="name" type="text" id="name" required="required" class="form-control" autofocus value="{{ old('name', $user->name) }}">
+                                    @if ($errors->has('name'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="username">Username
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="username" type="text" id="username" required="required" class="form-control" readonly="" autofocus value="{{ old('username', $user->username) }}">
+                                    @if ($errors->has('username'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="email" type="text" id="email" required="required" class="form-control" readonly="" autofocus value="{{ old('email', $user->email) }}">
+                                    @if ($errors->has('email'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <!-- <div class="item form-group{{ $errors->has('level') ? ' has-error' : '' }}">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="level">Level <span class="required">*</span></label>
+                            <div class="item form-group{{ $errors->has('level') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="level">Level
+                                </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="level" class="form-control select1" id="level" required>
-                                        <option></option>
-                                        <option value="Admin" @if($user->level == 'Admin') selected @endif>Admin</option>
-                                        <option value="Perawat" @if($user->level == 'Perawat') selected @endif>Perawat</option>
-                                    </select>
+                                    <input name="level" type="text" id="level" required="required" class="form-control" readonly="" autofocus value="{{ old('level', $user->level) }}">
+                                    @if ($errors->has('level'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('level') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
-                            </div> -->
+                            </div>
                             <div class="item form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
                                 </label>
