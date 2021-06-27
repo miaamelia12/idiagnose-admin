@@ -46,7 +46,7 @@ Route::resource('anak', AnakController::class);
 Route::delete('anak-delete/{id}', [AnakController::class, 'hapus'])->name('anak-delete');
 
 Route::resource('diagnosa', DiagnosaController::class);
-Route::get('hapusdiagnosa/{id}', [DiagnosaController::class, 'hapus'])->name('hapusdiagnosa');
+Route::delete('diagnosa-delete/{id}', [DiagnosaController::class, 'hapus'])->name('diagnosa-delete');
 
 Route::resource('pendamping', PendampingController::class);
 Route::delete('pendamping-delete/{id}', [PendampingController::class, 'hapus'])->name('pendamping-delete');
@@ -61,7 +61,7 @@ Route::resource('riwayat-prediksi', RiwayatPrediksiController::class);
 
 Route::resource('data-sampel', DataTrainingController::class);
 Route::post('', [DataTrainingController::class, 'store'])->name('data-sampel.store');
-Route::get('hapusdata/{id}', [DataTrainingController::class, 'hapus'])->name('hapusdata');
+Route::delete('data-sampel-delete/{id}', [DataTrainingController::class, 'hapus'])->name('data-sampel-delete');
 Route::post('/data-sampel', [DataTrainingController::class, 'import'])->name('import.file');
 
 Route::resource('prediksi-stunting', DataTestingController::class);

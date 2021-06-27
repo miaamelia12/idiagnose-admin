@@ -29,40 +29,65 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('nama_anak') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="nama_anak">Nama Anak <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input name="nama_anak" type="text" id="nama_anak" value="{{ old('nama_anak') }}" required class="form-control" autofocus>
+                                    @if ($errors->has('nama_anak'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('nama_anak') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('usia') ? ' has-error' : '' }}">
                                 <label for="usia" class="col-form-label col-md-3 col-sm-3 label-align">Usia (bulan) <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="usia" id="usia" class="form-control" type="number" value="{{ old('usia') }}" required>
+                                    <input name="usia" id="usia" class="form-control" type="number" value="{{ old('usia') }}" min="0" max="60" required autofocus>
+                                    @if ($errors->has('usia'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('usia') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label for="berat_badan" class="col-form-label col-md-3 col-sm-3 label-align">Berat Badan <span class="required">*</span></label>
+                            <div class="item form-group{{ $errors->has('berat_badan') ? ' has-error' : '' }}">
+                                <label for="berat_badan" class="col-form-label col-md-3 col-sm-3 label-align">Berat Badan (kg) <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="berat_badan" id="berat_badan" class="form-control" type="text" value="{{ old('berat_badan') }}" required>
+                                    <input name="berat_badan" id="berat_badan" class="form-control" type="text" value="{{ old('berat_badan') }}" required autofocus>
+                                    @if ($errors->has('berat_badan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('berat_badan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label for="tinggi_badan" class="col-form-label col-md-3 col-sm-3 label-align">Tinggi Badan <span class="required">*</span></label>
+                            <div class="item form-group{{ $errors->has('tinggi_badan') ? ' has-error' : '' }}">
+                                <label for="tinggi_badan" class="col-form-label col-md-3 col-sm-3 label-align">Tinggi Badan (cm) <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" value="{{ old('tinggi_badan') }}" required>
+                                    <input name="tinggi_badan" id="tinggi_badan" class="form-control" type="text" value="{{ old('tinggi_badan') }}" required autofocus>
+                                    @if ($errors->has('tinggi_badan'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('tinggi_badan') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="status" class="form-control select1" id="status" required="required">
+                                    <select name="status" class="form-control select1" id="status" required autofocus>
                                         <option></option>
                                         <option value="Normal">Normal</option>
                                         <option value="Pendek">Pendek</option>
                                         <option value="Sangat Pendek">Sangat Pendek</option>
                                     </select>
+                                    @if ($errors->has('status'))
+                                    <span class="red">
+                                        <strong>{{ $errors->first('status') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

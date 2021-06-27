@@ -3,6 +3,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -25,6 +27,8 @@
                     <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
                         @foreach($datas as $data)
                         <div class="panel" style="background-color: #F2F5F7;">
+                            <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                            <p style="display:none;">{{ $data->id }}</p>
                             <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo{{ $data->id }}" aria-expanded="false" aria-controls="collapseTwo">
                                 <h4 class="panel-title col-md-11">{{$data->nama_diagnosa}}
                                 </h4>
@@ -32,7 +36,7 @@
                             <a href="{{route('diagnosa.edit', $data->id)}}">
                                 <i class="fa fa-pencil-square-o " style="margin-left: 30px;"></i>
                             </a>
-                            <a href="{{route('hapusdiagnosa', $data->id)}}">
+                            <a class="servicedeletebtn">
                                 <i class="fa fa-trash-o " style="margin-left: 10px; margin-bottom: 10px;"></i>
                             </a>
                             <div id="collapseTwo{{ $data->id }}" class=" collapse " role=" tabpanel" aria-labelledby="headingTwo">
@@ -49,4 +53,54 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.servicedeletebtn').click(function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest(".panel").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/diagnosa-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
+@stop
+
 @endsection

@@ -13,6 +13,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
@@ -21,12 +23,17 @@
         <div class="title_right">
             <form action="{{route('import.file')}}" method="post" class="form-inline col-md-8 pull-right" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <div class="input-group">
+                <div class="input-group{{ $errors->has('file') ? ' has-error' : '' }}">
                     <input type="file" class="form-control" name="file" required="">
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-success" style="height: 38px; margin-left: -2px;">Import</button>
                     </span>
                 </div>
+                @if ($errors->has('file'))
+                <span class="red">
+                    <strong>{{ $errors->first('file') }}</strong>
+                </span>
+                @endif
             </form>
             <div class="col-md-4 form-group row pull-right top_search">
                 <a href="{{route('data-sampel.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 46px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
@@ -46,6 +53,7 @@
                                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th style="display:none;">Id</th>
                                             <th>Nama</th>
                                             <th>Usia (bulan)</th>
                                             <th>Berat Badan</th>
@@ -57,6 +65,8 @@
                                     <tbody>
                                         @foreach($datas as $data)
                                         <tr>
+                                            <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                            <td style="display:none;">{{ $data->id }}</td>
                                             <td>{{ $data->nama_anak }}</td>
                                             <td>{{ $data->usia }}</td>
                                             <td>{{ $data->berat_badan }}</td>
@@ -71,15 +81,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('data-sampel.edit', $data->id)}}">Edit</a>
-                                                        <a class="dropdown-item" href="{{route('hapusdata', $data->id)}}">Hapus</a>
-                                                    </div>
-                                                </div>
+                                                <a class="btn btn-success" href="{{ route('data-sampel.edit', $data->id) }}"><i class="fa fa-pencil-square-o"></i></a>
+                                                <button class="btn btn-danger deletebtn"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -110,6 +113,56 @@
 <script src="{{asset('assets/template/vendors/jszip/dist/jszip.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
 <script src="{{asset('assets/template/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
-@show
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#datatable').DataTable();
+
+        $('#datatable').on('click', '.deletebtn', function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/data-sampel-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+    });
+</script>
+
+@stop
 
 @endsection

@@ -23,10 +23,18 @@ class DataTrainingController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_anak' => 'required|string|max:255',
+            'usia' => 'required|numeric|min:0|max:60',
+            'berat_badan' => 'required|numeric|min:0',
+            'tinggi_badan' => 'required|numeric|min:0',
+            'status' => 'required|string|max:255',
+        ]);
+
         $input = $request->all();
         DataTraining::create($input);
 
-        return redirect()->route('data-sampel.index');
+        return redirect()->route('data-sampel.index')->with('success', 'Data Sampel Berhasil Ditambahkan!');
     }
 
     public function import(Request $request)
@@ -44,16 +52,26 @@ class DataTrainingController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nama_anak' => 'required|string|max:255',
+            'usia' => 'required|numeric|min:0|max:60',
+            'berat_badan' => 'required|numeric|min:0',
+            'tinggi_badan' => 'required|numeric|min:0',
+            'status' => 'required|string|max:255',
+        ]);
+
         $datas = DataTraining::findOrFail($id);
         $request->all();
         $datas->update($request->all());
 
-        return redirect()->route('data-sampel.index');
+        return redirect()->route('data-sampel.index')->with('success', 'Data Sampel Berhasil Diupdate!');
     }
 
     public function hapus($id)
     {
-        DataTraining::findOrFail($id)->delete();
-        return redirect()->route('data-sampel.index');
+        $sampel = DataTraining::findOrFail($id);
+        $sampel->delete();
+
+        return response()->json(['status' => 'Data Berhasil Terhapus!']);
     }
 }
