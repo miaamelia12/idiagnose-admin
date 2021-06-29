@@ -9,10 +9,10 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                @if(Auth::user()->gambar == '')
+                @if(Auth::user()->profil == '')
                 <img src="{{asset('assets/template/production/images/user.png')}}" alt="..." class="img-circle profile_img">
                 @else
-                <img src="{{asset('images/user/'. Auth::user()->gambar)}}" alt="profile image" class="avatar" style="margin: 25px 0 0 20px; width: 50px; height: 50px; border-radius: 50%;">
+                <img src="{{asset('images/user/'. Auth::user()->profil)}}" alt="profile image" class="avatar" style="margin: 25px 0 0 20px; width: 50px; height: 50px; border-radius: 50%;">
                 @endif
             </div>
             <div class="profile_info">

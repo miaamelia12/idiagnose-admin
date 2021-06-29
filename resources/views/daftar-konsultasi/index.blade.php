@@ -59,7 +59,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($datas as $data)
+                                    @foreach($waiting as $data)
                                     <tr>
                                         <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
                                         <td style="display:none;">{{ $data->id }}</td>
@@ -82,9 +82,7 @@
                                             {{ $data->konsultan->rumah_sakit }}
                                         </td>
                                         <td>
-                                            @foreach($waiting as $menunggu)
-                                            <span class="badge badge-warning">{{ $menunggu->status }}</span>
-                                            @endforeach
+                                            <span class="badge badge-warning">{{ $data->status }}</span>
                                         </td>
                                         <td>
                                             <div class="btn-group">
@@ -102,12 +100,66 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-                        booth letterpress, commodo enim craft beer mlkshk aliquip
+                        <div class="card-box table-responsive">
+                            <table id="datatable" class="table table-striped table-bordered datatable" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="display:none;">Id</th>
+                                        <th>Nama Anak</th>
+                                        <th>Tgl Konsultasi</th>
+                                        <th>Problema</th>
+                                        <th>Konsultan</th>
+                                        <th>Spesialis</th>
+                                        <th>Rumah Sakit</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($finish as $data)
+                                    <tr>
+                                        <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
+                                        <td style="display:none;">{{ $data->id }}</td>
+                                        <td>
+                                            {{ $data->anak->nama }}
+                                        </td>
+                                        <td>
+                                            {{ date('d M Y', strtotime($data->tgl_konsultasi)) }}
+                                        </td>
+                                        <td>
+                                            {{ $data->problema }}
+                                        </td>
+                                        <td>
+                                            {{ $data->konsultan->nama_konsultan }}
+                                        </td>
+                                        <td>
+                                            {{ $data->konsultan->spesialis }}
+                                        </td>
+                                        <td>
+                                            {{ $data->konsultan->rumah_sakit }}
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-success">{{ $data->status }}</span>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Action
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{route('daftar-konsultasi.show', $data->id)}}">Detail</a>
+                                                    <a class="dropdown-item deletebtn">Hapus</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +197,42 @@
         $('#datatable').DataTable();
 
         $('#datatable').on('click', '.deletebtn', function(e) {
+            e.preventDefault();
+
+            var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();
+
+            swal({
+                    title: "Apakah Anda Yakin?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            "_token": $('input[name="csrf-token"]').val(),
+                            "id": delete_id,
+                        };
+                        $.ajax({
+                            type: "DELETE",
+                            url: '/konsultasi-delete/' + delete_id,
+                            data: data,
+                            success: function(response) {
+                                swal(response.status, {
+                                        icon: "success",
+                                    })
+                                    .then((result) => {
+                                        location.reload();
+                                    });
+                            }
+                        });
+                    }
+                });
+        });
+
+        $('.datatable').DataTable();
+
+        $('.datatable').on('click', '.deletebtn', function(e) {
             e.preventDefault();
 
             var delete_id = $(this).closest("tr").find('.serdelete_val_id').val();

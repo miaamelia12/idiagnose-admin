@@ -7,6 +7,7 @@ use App\Models\EuclideanDistance;
 use App\Models\HasilPrediksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DataTestingController extends Controller
 {
@@ -29,87 +30,93 @@ class DataTestingController extends Controller
 
         $nama_anak = $request->get('nama_anak');
 
-        DB::table('euclidean_distance')->delete();
+        if (empty($data_training)) {
 
-        for ($i = 0; $i < count($data_training); $i++) {
-            $id_training = $data_training[$i]->id;
-            $usia_training = $data_training[$i]->usia;
-            $bb_training = $data_training[$i]->berat_badan;
-            $tb_training = $data_training[$i]->tinggi_badan;
+            DB::table('euclidean_distance')->delete();
 
-            $usia_testing = $request->get('usia');
-            $bb_testing = $request->get('berat_badan');
-            $tb_testing = $request->get('tinggi_badan');
+            for ($i = 0; $i < count($data_training); $i++) {
+                $id_training = $data_training[$i]->id;
+                $usia_training = $data_training[$i]->usia;
+                $bb_training = $data_training[$i]->berat_badan;
+                $tb_training = $data_training[$i]->tinggi_badan;
 
-            $usia = $usia_training - $usia_testing;
-            $bb = $bb_training - $bb_testing;
-            $tb = $tb_training - $tb_testing;
+                $usia_testing = $request->get('usia');
+                $bb_testing = $request->get('berat_badan');
+                $tb_testing = $request->get('tinggi_badan');
 
-            $pangkat_usia = pow($usia, 2);
-            $pangkat_bb = pow($bb, 2);
-            $pangkat_tb = pow($tb, 2);
+                $usia = $usia_training - $usia_testing;
+                $bb = $bb_training - $bb_testing;
+                $tb = $tb_training - $tb_testing;
 
-            $jumlah = $pangkat_usia + $pangkat_bb + $pangkat_tb;
+                $pangkat_usia = pow($usia, 2);
+                $pangkat_bb = pow($bb, 2);
+                $pangkat_tb = pow($tb, 2);
 
-            $euclidean_distance = sqrt($jumlah);
+                $jumlah = $pangkat_usia + $pangkat_bb + $pangkat_tb;
 
-            $hasil = round($euclidean_distance, 8);
+                $euclidean_distance = sqrt($jumlah);
 
-            $data = [
-                'distance' => $hasil,
-                'training_id' => $id_training,
-            ];
-            $distance = EuclideanDistance::all();
+                $hasil = round($euclidean_distance, 8);
 
-            DB::table('euclidean_distance')->insert($data);
-        }
+                $data = [
+                    'distance' => $hasil,
+                    'training_id' => $id_training,
+                ];
+                $distance = EuclideanDistance::all();
 
-        $rank_terkecil = EuclideanDistance::orderBy('distance', 'ASC')->take(5)->get();
-
-        $get_status = [
-            0 => 0,
-            1 => 0,
-            2 => 0,
-        ];
-        for ($i = 0; $i < count($rank_terkecil); $i++) {
-            $training_id = $rank_terkecil[$i]->training_id;
-
-            $nilai_status = DB::table('data_training')->where('id', $training_id)->first();
-            if ($nilai_status->status == 'Normal') {
-                $get_status[0] += 1;
-            } elseif ($nilai_status->status == 'Pendek') {
-                $get_status[1] += 1;
-            } elseif ($nilai_status->status == 'Sangat Pendek') {
-                $get_status[2] += 1;
+                DB::table('euclidean_distance')->insert($data);
             }
+
+            $rank_terkecil = EuclideanDistance::orderBy('distance', 'ASC')->take(5)->get();
+
+            $get_status = [
+                0 => 0,
+                1 => 0,
+                2 => 0,
+            ];
+            for ($i = 0; $i < count($rank_terkecil); $i++) {
+                $training_id = $rank_terkecil[$i]->training_id;
+
+                $nilai_status = DB::table('data_training')->where('id', $training_id)->first();
+                if ($nilai_status->status == 'Normal') {
+                    $get_status[0] += 1;
+                } elseif ($nilai_status->status == 'Pendek') {
+                    $get_status[1] += 1;
+                } elseif ($nilai_status->status == 'Sangat Pendek') {
+                    $get_status[2] += 1;
+                }
+            }
+            $max_status = max($get_status);
+            $search = array_search($max_status, $get_status);
+
+            if ($search == 0) {
+                $hasil_status = 'Normal';
+            } elseif ($search == 1) {
+                $hasil_status = 'Pendek';
+            } elseif ($search == 2) {
+                $hasil_status = 'Sangat Pendek';
+            }
+
+            HasilPrediksi::create([
+                'nama_anak' => $nama_anak,
+                'usia' => $usia_testing,
+                'berat_badan' => $bb_testing,
+                'tinggi_badan' => $tb_testing,
+                'status' => $hasil_status,
+            ]);
+
+            $get_hasil = (object)[
+                'nama_anak' => $nama_anak,
+                'usia' => $usia_testing,
+                'berat_badan' => $bb_testing,
+                'tinggi_badan' => $tb_testing,
+                'status' => $hasil_status,
+            ];
+
+            return view('prediksi-stunting.hasil', compact('get_hasil'));
+        } else {
+            Alert::info('Oopss..', 'Data Sampel Kosong, Input Data Minimal Sebanyak 50!');
+            return redirect()->to('data-sampel');
         }
-        $max_status = max($get_status);
-        $search = array_search($max_status, $get_status);
-
-        if ($search == 0) {
-            $hasil_status = 'Normal';
-        } elseif ($search == 1) {
-            $hasil_status = 'Pendek';
-        } elseif ($search == 2) {
-            $hasil_status = 'Sangat Pendek';
-        }
-
-        HasilPrediksi::create([
-            'nama_anak' => $nama_anak,
-            'usia' => $usia_testing,
-            'berat_badan' => $bb_testing,
-            'tinggi_badan' => $tb_testing,
-            'status' => $hasil_status,
-        ]);
-
-        $get_hasil = (object)[
-            'nama_anak' => $nama_anak,
-            'usia' => $usia_testing,
-            'berat_badan' => $bb_testing,
-            'tinggi_badan' => $tb_testing,
-            'status' => $hasil_status,
-        ];
-
-        return view('prediksi-stunting.hasil', compact('get_hasil'));
     }
 }

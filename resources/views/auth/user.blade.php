@@ -43,8 +43,8 @@
                                             <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
                                             <td style="display:none;">{{ $data->id }}</td>
                                             <td>
-                                                @if($data->gambar)
-                                                <img src="{{url('images/user/'. $data->gambar)}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
+                                                @if($data->profil)
+                                                <img src="{{url('images/user/'. $data->profil)}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
                                                 @else
                                                 <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="avatar" style="margin-right: 10px; width: 50px; height: 50px; border-radius: 50%;" />
                                                 @endif

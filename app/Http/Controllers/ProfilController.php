@@ -26,19 +26,20 @@ class ProfilController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'profil' => 'image',
             'password' => 'required',
         ]);
 
         $id = Auth::user()->id;
         $user_data = User::findOrFail($id);
 
-        if ($request->file('gambar')) {
-            $file = $request->file('gambar');
+        if ($request->file('profil')) {
+            $file = $request->file('profil');
             $dt = Carbon::now();
             $acak  = $file->getClientOriginalExtension();
             $fileName = rand(11111, 99999) . '-' . $dt->format('Y-m-d-H-i-s') . '.' . $acak;
-            $request->file('gambar')->move("images/user", $fileName);
-            $user_data->gambar = $fileName;
+            $request->file('profil')->move("images/user", $fileName);
+            $user_data->profil = $fileName;
         }
 
         $user_data->name = $request->input('name');

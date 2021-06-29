@@ -13,6 +13,8 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <!-- top tiles -->
 <div class="row">
     <div class="col-md-12">

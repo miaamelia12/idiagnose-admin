@@ -17,11 +17,11 @@
             <div class="x_panel">
                 <div class="x_content">
                     <br />
-                    <label class="col-form-label" for=" gambar">Profil :</label>
+                    <label class="col-form-label" for=" profil">Profil :</label>
                     <br />
 
-                    @if($datas->gambar)
-                    <img src="{{url('images/user/'. $datas->gambar)}}" alt="image" class="product" width="200" height="200" />
+                    @if($datas->profil)
+                    <img src="{{url('images/user/'. $datas->profil)}}" alt="image" class="product" width="200" height="200" />
                     @else
                     <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
                     @endif

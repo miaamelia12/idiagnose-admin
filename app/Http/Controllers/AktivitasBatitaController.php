@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\JadwalAktivitas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AktivitasBatitaController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = JadwalAktivitas::where('kategori_aktivitas', 'Batita')->orderBy('jam_mulai', 'asc')->get();
 
         return view('aktivitas-batita.index', compact('datas'));
@@ -17,6 +24,11 @@ class AktivitasBatitaController extends Controller
 
     public function show($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-batita.show', compact('datas'));
@@ -24,6 +36,11 @@ class AktivitasBatitaController extends Controller
 
     public function create()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         return view('aktivitas-batita.create');
     }
 
@@ -50,6 +67,11 @@ class AktivitasBatitaController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = JadwalAktivitas::findOrFail($id);
 
         return view('aktivitas-batita.edit', compact('datas'));

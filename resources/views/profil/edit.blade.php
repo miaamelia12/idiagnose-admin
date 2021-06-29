@@ -30,18 +30,18 @@
                         <br />
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-                            <div class="item form-group{{ $errors->has('gambar') ? ' has-error' : '' }}">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Foto Profil</label>
+                            <div class="item form-group{{ $errors->has('profil') ? ' has-error' : '' }}">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="profil">Foto Profil</label>
                                 <div class="col-md-6">
-                                    @if($user->gambar)
-                                    <img src="{{url('images/user/'. $user->gambar)}}" alt="image" class="product" width="200" height="200" />
+                                    @if($user->profil)
+                                    <img src="{{url('images/user/'. $user->profil)}}" alt="image" class="product" width="200" height="200" />
                                     @else
                                     <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
                                     @endif
-                                    <input type="file" class="uploads" style="margin-top: 20px;" name="gambar">
-                                    @if ($errors->has('gambar'))
+                                    <input type="file" class="uploads" style="margin-top: 20px;" name="profil">
+                                    @if ($errors->has('profil'))
                                     <span class="red">
-                                        <strong>{{ $errors->first('gambar') }}</strong>
+                                        <strong>{{ $errors->first('profil') }}</strong>
                                     </span>
                                     @endif
                                 </div>

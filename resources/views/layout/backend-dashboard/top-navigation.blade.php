@@ -8,10 +8,10 @@
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        @if(Auth::user()->gambar == '')
+                        @if(Auth::user()->profil == '')
                         <img src="{{asset('assets/template/production/images/user.png')}}" alt="">
                         @else
-                        <img src="{{asset('images/user/'. Auth::user()->gambar)}}" alt="profile image">
+                        <img src="{{asset('images/user/'. Auth::user()->profil)}}" alt="profile image">
                         @endif
                         {{ Auth::user()->name }}
                     </a>

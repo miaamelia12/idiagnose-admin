@@ -8,6 +8,7 @@ use App\Models\Konsultan;
 use App\Models\Pendamping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,15 +16,24 @@ class DaftarKonsultasiController extends Controller
 {
     public function index()
     {
-        $datas = DaftarKonsultasi::all();
-        $waiting = DaftarKonsultasi::menunggu();
-        $finish = DaftarKonsultasi::selesai();
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
 
-        return view('daftar-konsultasi.index', compact('datas', 'waiting', 'finish'));
+        $waiting = DaftarKonsultasi::where('status', 'Menunggu')->orderBy('created_at', 'asc')->get();
+        $finish = DaftarKonsultasi::where('status', 'Selesai')->orderBy('created_at', 'asc')->get();
+
+        return view('daftar-konsultasi.index', compact('waiting', 'finish'));
     }
 
     public function show($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = DB::table('daftar_konsultasi')
             ->leftJoin('anak', 'daftar_konsultasi.anak_id', '=', 'anak.id')
             ->leftJoin('konsultan', 'daftar_konsultasi.konsultan_id', '=', 'konsultan.id')
@@ -39,6 +49,11 @@ class DaftarKonsultasiController extends Controller
 
     public function create()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $anak = Anak::all();
         $konsultan = Konsultan::all();
         $pendamping = Pendamping::all();
@@ -89,6 +104,11 @@ class DaftarKonsultasiController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = DaftarKonsultasi::findOrFail($id);
         $anak = Anak::all();
         $konsultan = Konsultan::all();

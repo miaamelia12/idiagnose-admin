@@ -5,9 +5,21 @@ namespace App\Imports;
 use App\Models\DataTraining;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class DataTrainingImport implements ToModel, WithHeadingRow
+class DataTrainingImport implements ToModel, WithHeadingRow, WithValidation
 {
+    public function rules(): array
+    {
+        return [
+            'nama_anak' => 'required',
+            'usia' => 'required',
+            'berat_badan' => 'required',
+            'tinggi_badan' => 'required',
+            'status' => 'required',
+        ];
+    }
+
     /**
      * @param array $row
      *

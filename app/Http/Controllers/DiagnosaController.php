@@ -4,17 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Diagnosa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DiagnosaController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = Diagnosa::all();
         return view('diagnosa.index', compact('datas'));
     }
 
     public function create()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         return view('diagnosa.create');
     }
 
@@ -33,6 +45,11 @@ class DiagnosaController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = Diagnosa::findOrFail($id);
 
         return view('diagnosa.edit', compact('datas'));

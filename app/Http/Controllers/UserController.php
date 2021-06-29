@@ -24,6 +24,11 @@ class UserController extends Controller
 
     public function create()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         return view('auth.register');
     }
 
@@ -70,6 +75,11 @@ class UserController extends Controller
 
     public function show($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = User::findOrFail($id);
 
         return view('auth.show', compact('datas'));
@@ -77,6 +87,11 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = User::findOrFail($id);
 
         return view('auth.edit', compact('datas'));

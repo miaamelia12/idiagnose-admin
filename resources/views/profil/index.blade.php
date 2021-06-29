@@ -17,13 +17,13 @@
             <div class="x_panel">
                 <div class="x_content">
                     <br />
-                    <label style="color: #000000;" for="gambar">Foto Profil :</label>
+                    <label style="color: #000000;" for="profil">Foto Profil :</label>
                     <br />
 
-                    @if(Auth::user()->gambar == '')
+                    @if(Auth::user()->profil == '')
                     <img src="{{asset('assets/template/production/images/user.png')}}" alt="image" class="product" width="200" height="200" />
                     @else
-                    <img src="{{url('images/user/'. Auth::user()->gambar)}}" alt="image" class="product" width="200" height="200" />
+                    <img src="{{url('images/user/'. Auth::user()->profil)}}" alt="image" class="product" width="200" height="200" />
                     @endif
                     <br /> <br />
 

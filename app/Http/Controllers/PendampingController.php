@@ -5,17 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\Pendamping;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PendampingController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = Pendamping::all();
         return view('pendamping.index', compact('datas'));
     }
 
     public function create()
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         return view('pendamping.create');
     }
 
@@ -49,6 +61,11 @@ class PendampingController extends Controller
 
     public function edit($id)
     {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
         $datas = Pendamping::findOrFail($id);
 
         return view('pendamping.edit', compact('datas'));

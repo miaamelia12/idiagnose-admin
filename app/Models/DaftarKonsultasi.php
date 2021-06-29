@@ -26,24 +26,4 @@ class DaftarKonsultasi extends Model
     {
         return $this->belongsToMany(Pendamping::class, 'pendamping_konsultasi', 'pendamping_id', 'konsultasi_id')->withTimestamps();
     }
-
-    public static function menunggu()
-    {
-        $queryData =
-            "SELECT * FROM daftar_konsultasi
-            WHERE status = 'Menunggu'
-            GROUP BY created_at ASC";
-
-        return DB::select($queryData);
-    }
-
-    public static function selesai()
-    {
-        $queryData =
-            "SELECT * FROM daftar_konsultasi
-            WHERE status = 'Selesai'
-            GROUP BY created_at ASC";
-
-        return DB::select($queryData);
-    }
 }
