@@ -85,7 +85,7 @@
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button type="submit" onclick="window.location='{{ route("daftar-konsultasi.index")}}'" class="btn btn-secondary">Kembali</button>
+                            <button type="submit" onclick="window.location='{{ route("jadwal-konsultasi.index")}}'" class="btn btn-secondary">Kembali</button>
                         </div>
                     </div>
                 </div>

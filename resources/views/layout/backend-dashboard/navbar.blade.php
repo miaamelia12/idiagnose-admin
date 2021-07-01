@@ -84,7 +84,10 @@
                                 <a href="{{ route('diagnosa.index') }}" class="nav-link {{ Request::is('diagnosa') ? 'active' : '' }}">Daftar Diagnosa</a>
                             </li>
                             <li>
-                                <a href="{{ route('daftar-konsultasi.index') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Daftar Konsultasi</a>
+                                <a href="{{ route('jadwal-konsultasi.index') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Jadwal Konsultasi</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('riwayat-konsultasi.index') }}" class="nav-link {{ Request::is('/') ? 'active' : '' }}">Riwayat Konsultasi</a>
                             </li>
                         </ul>
                     </li>

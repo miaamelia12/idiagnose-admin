@@ -18,12 +18,11 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Data Anak</h3>
+            <h3>Riwayat Konsultasi</h3>
         </div>
         <div class="title_right">
             <div class="col-md-12 form-group row pull-right top_search">
-                <a href="{{route('anak.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 291px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
-                <a href="{{route('export-data-anak')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Export PDF</button></a>
+                <a href="{{route('export-riwayat-konsultasi')}}"><button type="button" class="btn btn-dark" style="margin-left: 434px;"><i class="fa fa-download"></i> Export PDF</button></a>
             </div>
         </div>
     </div>
@@ -41,33 +40,41 @@
                                     <thead>
                                         <tr>
                                             <th style="display:none;">Id</th>
-                                            <th>Nama</th>
-                                            <th>Tgl Lahir</th>
-                                            <th>Tgl Masuk YSI</th>
-                                            <th>Jenis Kelamin</th>
-                                            <th>Pendidikan</th>
+                                            <th>Nama Anak</th>
+                                            <th>Tgl Konsultasi</th>
+                                            <th>Problema</th>
+                                            <th>Konsultan</th>
+                                            <th>Spesialis</th>
+                                            <th>Rumah Sakit</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($datas as $data)
+                                        @foreach($finish as $data)
                                         <tr>
                                             <input type="hidden" class="serdelete_val_id" value="{{ $data->id }}">
                                             <td style="display:none;">{{ $data->id }}</td>
                                             <td>
-                                                {{ $data->nama }}
+                                                {{ $data->anak->nama }}
                                             </td>
                                             <td>
-                                                {{ date('d M Y', strtotime($data->tgl_lahir)) }}
+                                                {{ date('d M Y', strtotime($data->tgl_konsultasi)) }}
                                             </td>
                                             <td>
-                                                {{ date('d M Y', strtotime($data->tgl_masuk_ysi)) }}
+                                                {{ $data->problema }}
                                             </td>
                                             <td>
-                                                {{ $data->jk }}
+                                                {{ $data->konsultan->nama_konsultan }}
                                             </td>
                                             <td>
-                                                {{ $data->pendidikan }}
+                                                {{ $data->konsultan->spesialis }}
+                                            </td>
+                                            <td>
+                                                {{ $data->konsultan->rumah_sakit }}
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-success">{{ $data->status }}</span>
                                             </td>
                                             <td>
                                                 <div class="btn-group">
@@ -75,9 +82,8 @@
                                                         Action
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('anak.show', $data->id) }}">Detail</a>
-                                                        <a class="dropdown-item" href="{{ route('anak.edit', $data->id) }}">Edit</a>
-                                                        <a class="dropdown-item" href="{{ route('export-anak-id', $data->id) }}">Export PDF</a>
+                                                        <a class="dropdown-item" href="{{route('riwayat-konsultasi.show', $data->id)}}">Detail</a>
+                                                        <a class="dropdown-item" href="{{ route('export-konsultasi-id', $data->id) }}">Export PDF</a>
                                                         <a class="dropdown-item deletebtn">Hapus</a>
                                                     </div>
                                                 </div>
@@ -86,7 +92,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -144,7 +149,7 @@
                         };
                         $.ajax({
                             type: "DELETE",
-                            url: '/anak-delete/' + delete_id,
+                            url: '/riwayat-konsultasi-delete/' + delete_id,
                             data: data,
                             success: function(response) {
                                 swal(response.status, {

@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class DaftarKonsultasi extends Model
+class JadwalKonsultasi extends Model
 {
     use HasFactory;
-    protected $table = "daftar_konsultasi";
+    protected $table = "jadwal_konsultasi";
     protected $fillable = ['tgl_konsultasi', 'problema', 'analisis_ahli', 'status', 'anak_id', 'konsultan_id'];
 
     public function anak()

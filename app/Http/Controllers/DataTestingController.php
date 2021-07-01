@@ -6,6 +6,7 @@ use App\Models\Anak;
 use App\Models\EuclideanDistance;
 use App\Models\HasilPrediksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -30,7 +31,7 @@ class DataTestingController extends Controller
 
         $nama_anak = $request->get('nama_anak');
 
-        if (empty($data_training)) {
+        if (count($data_training) >= 50) {
 
             DB::table('euclidean_distance')->delete();
 
@@ -115,8 +116,11 @@ class DataTestingController extends Controller
 
             return view('prediksi-stunting.hasil', compact('get_hasil'));
         } else {
-            Alert::info('Oopss..', 'Data Sampel Kosong, Input Data Minimal Sebanyak 50!');
-            return redirect()->to('data-sampel');
+            if (Auth::user()->level == 'Admin') {
+                return redirect()->route('data-sampel.index')->with('info', 'Input Data Sampel Minimal Sebanyak 50!');
+            } else {
+                return redirect()->route('home')->with('info', 'Admin Harus Input Data Sampel Minimal Sebanyak 50!');
+            }
         }
     }
 }

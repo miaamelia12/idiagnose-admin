@@ -48,7 +48,7 @@
                             <div class="count">{{ $konsultasi->count() }}</div>
 
                             <h3>Konsultasi</h3>
-                            <p>Total Daftar Konsultasi</p>
+                            <p>Total Jadwal Konsultasi</p>
                         </div>
                     </div>
                     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6  ">
@@ -68,6 +68,9 @@
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2>Riwayat Prediksi Stunting</h2>
+                                <div class="nav navbar-right panel_toolbox">
+                                    <a href="{{route('export-riwayat-prediksi')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Export PDF</button></a>
+                                </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">

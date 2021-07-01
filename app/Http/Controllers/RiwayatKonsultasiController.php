@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\JadwalKonsultasi;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
+class RiwayatKonsultasiController extends Controller
+{
+    public function index()
+    {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
+        $finish = JadwalKonsultasi::where('status', 'Selesai')->orderBy('created_at', 'asc')->get();
+
+        return view('riwayat-konsultasi.index', compact('finish'));
+    }
+
+    public function show($id)
+    {
+        if (Auth::user()->level != 'Admin') {
+            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini');
+            return redirect()->to('/');
+        }
+
+        $datas = DB::table('jadwal_konsultasi')
+            ->leftJoin('anak', 'jadwal_konsultasi.anak_id', '=', 'anak.id')
+            ->leftJoin('konsultan', 'jadwal_konsultasi.konsultan_id', '=', 'konsultan.id')
+            ->where('jadwal_konsultasi.id', $id)
+            ->first();
+
+        $pendamping = DB::table('pendamping_konsultasi')
+            ->leftJoin('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
+            ->where('konsultasi_id', $id)->get();
+
+        return view('riwayat-konsultasi.show', compact('datas', 'pendamping'));
+    }
+
+    public function exportPDF()
+    {
+        $all_data = DB::table('jadwal_konsultasi')
+            ->join('anak', 'anak.id', '=', 'jadwal_konsultasi.anak_id')
+            ->join('konsultan', 'konsultan.id', '=', 'jadwal_konsultasi.konsultan_id')
+            ->join('pendamping_konsultasi', 'jadwal_konsultasi.id', '=', 'pendamping_konsultasi.konsultasi_id')
+            ->join('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
+            ->select('anak.nama', 'konsultan.nama_konsultan', 'konsultan.spesialis', 'konsultan.rumah_sakit', 'pendamping.nama_pendamping', 'jadwal_konsultasi.problema', 'jadwal_konsultasi.analisis_ahli', 'jadwal_konsultasi.status', 'jadwal_konsultasi.tgl_konsultasi')
+            ->where('jadwal_konsultasi.status', 'selesai')
+            ->get();
+
+        $pdf = \PDF::loadView(
+            'riwayat-konsultasi.pdf-riwayat-konsultasi',
+            [
+                'all_data' => $all_data
+            ]
+        );
+        return $pdf->stream();
+    }
+
+    public function hapus($id)
+    {
+        $konsultasi = JadwalKonsultasi::findOrFail($id);
+        $konsultasi->delete();
+
+        return response()->json(['status' => 'Data Berhasil Terhapus!']);
+    }
+}

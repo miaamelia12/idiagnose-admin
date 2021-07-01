@@ -11,8 +11,8 @@ class Pendamping extends Model
     protected $table = "pendamping";
     protected $fillable = ['nama_pendamping', 'jabatan', 'profil'];
 
-    public function daftar_konsultasi()
+    public function jadwal_konsultasi()
     {
-        return $this->belongsToMany(DaftarKonsultasi::class, 'pendamping_konsultasi', 'pendamping_id', 'konsultasi_id')->withTimestamps();
+        return $this->belongsToMany(JadwalKonsultasi::class, 'pendamping_konsultasi', 'pendamping_id', 'konsultasi_id')->withTimestamps();
     }
 }

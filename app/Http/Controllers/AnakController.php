@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AnakExport;
 use App\Models\Anak;
 use App\Models\Diagnosa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class AnakController extends Controller
 {
@@ -31,6 +35,38 @@ class AnakController extends Controller
 
         $datas = Anak::findOrFail($id);
         return view('anak.show', compact('datas'));
+    }
+
+    public function exportPDF()
+    {
+        $all_data = DB::table('anak')
+            ->join('diagnosa_anak', 'anak.id', '=', 'diagnosa_anak.anak_id')
+            ->join('diagnosa', 'diagnosa.id', '=', 'diagnosa_anak.diagnosa_id')
+            ->select('diagnosa.nama_diagnosa', 'anak.nama', 'anak.usia', 'anak.berat_badan', 'anak.tinggi_badan', 'anak.jk', 'anak.tgl_lahir')
+            ->get();
+
+        $pdf = \PDF::loadView(
+            'anak.pdf-anak',
+            [
+                'all_data' => $all_data
+            ]
+        );
+        return $pdf->stream();
+    }
+
+    public function exportPDFId($id)
+    {
+        $datas = Anak::findOrFail($id);
+        $pdf = \PDF::loadView(
+            'anak.pdf-id',
+            ['datas' => $datas]
+        );
+        return $pdf->stream();
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new AnakExport, 'anak.xlsx');
     }
 
     public function create()

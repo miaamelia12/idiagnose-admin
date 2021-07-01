@@ -8,23 +8,24 @@
 @section('title','Monika - Admin')
 
 @section('content')
+
+@include('sweetalert::alert')
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Edit Daftar Konsultasi</h3>
+            <h3>Tambah Jadwal Konsultasi</h3>
         </div>
     </div>
 
     <div class="clearfix"></div>
 
-    <form method="POST" id="validate_form" action="{{route('daftar-konsultasi.update', $datas->id)}}" enctype="multipart/form-data">
+    <form method="POST" id="validate_form" action="{{route('jadwal-konsultasi.store')}}" enctype="multipart/form-data">
         {{ csrf_field() }}
-        {{ method_field('put') }}
         <div class="row">
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Edit Data</h2>
+                        <h2>Form Tambah Data</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -37,7 +38,7 @@
                                     <select name="anak_id" class="form-control select1" id="anak_id" required autofocus>
                                         <option></option>
                                         @foreach ($anak as $an)
-                                        <option value="{{ $an->id }}" {{$datas->anak_id === $an->id ? "selected" : ""}}>{{ $an->nama }}</option>
+                                        <option value="{{ $an->id }}">{{ $an->nama }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('anak_id'))
@@ -52,7 +53,7 @@
                                 <div class="col-md-6 col-sm-6 ">
                                     <div class="form-group">
                                         <div class='input-group date' id='myDatepicker2'>
-                                            <input type='text' class="form-control" name="tgl_konsultasi" placeholder="dd-mm-yyyy" required autofocus value="{{ date('d M Y', strtotime($datas->tgl_konsultasi)) }}" />
+                                            <input type='text' class="form-control" name="tgl_konsultasi" placeholder="dd-mm-yyyy" value="{{ old('tgl_konsultasi') }}" required autofocus />
                                             <span class="input-group-addon">
                                                 <span class="fa fa-calendar" style="margin-top: 5px;"></span>
                                             </span>
@@ -68,7 +69,7 @@
                             <div class="item form-group{{ $errors->has('problema') ? ' has-error' : '' }}">
                                 <label for="problema" class="col-form-label col-md-3 col-sm-3 label-align">Problema <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input name="problema" id="problema" class="form-control" type="text" name="problema" required autofocus value="{{ $datas->problema }}">
+                                    <input name="problema" id="problema" class="form-control" type="text" name="problema" value="{{ old('problema') }}" required autofocus>
                                     @if ($errors->has('problema'))
                                     <span class="red">
                                         <strong>{{ $errors->first('problema') }}</strong>
@@ -82,7 +83,7 @@
                                     <select name="konsultan_id" class="form-control select1" id="konsultan_id" required autofocus>
                                         <option></option>
                                         @foreach ($konsultan as $k)
-                                        <option value="{{ $k->id }}" {{$datas->konsultan_id === $k->id ? "selected" : ""}}>{{ $k->nama_konsultan }}</option>
+                                        <option value="{{ $k->id }}">{{ $k->nama_konsultan }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('konsultan_id'))
@@ -95,9 +96,9 @@
                             <div class="item form-group{{ $errors->has('pendamping') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pendamping">Pendamping <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="pendamping[]" class="form-control pendamping" id="pendamping" multiple="multiple" required autofocus>
-                                        @foreach ($pendamping as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama_pendamping }}</option>
+                                    <select name="pendamping[]" class="form-control select" id="pendamping" multiple="multiple" required autofocus>
+                                        @foreach ($pendamping as $p)
+                                        <option value="{{ $p->id }}">{{ $p->nama_pendamping }}</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('pendamping'))
@@ -110,7 +111,7 @@
                             <div class="item form-group{{ $errors->has('analisis_ahli') ? ' has-error' : '' }}">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="analisis_ahli">Analisis Ahli</label>
                                 <div class="col-md-9 col-sm-9 ">
-                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="analisis_ahli" id="analisis_ahli" autofocus><?php echo $datas['analisis_ahli'] ?></textarea>
+                                    <textarea style="height: 150px;" class="resizable_textarea form-control" name="analisis_ahli" id="analisis_ahli" value="{{ old('analisis_ahli') }}" autofocus></textarea>
                                     @if ($errors->has('analisis_ahli'))
                                     <span class="red">
                                         <strong>{{ $errors->first('analisis_ahli') }}</strong>
@@ -118,26 +119,16 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="item form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status <span class="required">*</span></label>
+                            <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select name="status" class="form-control select1" id="status" required>
-                                        <option></option>
-                                        <option value="Menunggu" @if($datas->status == 'Menunggu') selected @endif>Menunggu</option>
-                                        <option value="Selesai" @if($datas->status == 'Selesai') selected @endif>Selesai</option>
-                                    </select>
-                                    @if ($errors->has('status'))
-                                    <span class="red">
-                                        <strong>{{ $errors->first('status') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input name="status" type="hidden" id="status" class="form-control" value="Menunggu">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">
-                                    <a href="{{route('daftar-konsultasi.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
-                                    <button type="submit" class="btn btn-success">Update</button>
+                                    <a href="{{route('jadwal-konsultasi.index')}}"><button class="btn btn-danger" type="button">Batal</button></a>
+                                    <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -154,29 +145,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 <script src="{{asset('assets/template/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 
-@php
-$pendamping_ids = [];
-@endphp
-
-@foreach ($datas->pendamping as $pendamping_konsul)
-@php
-array_push($pendamping_ids, $pendamping_konsul->id);
-@endphp
-@endforeach
-
 <script type="text/javascript">
     $(document).ready(function() {
         // Select Multiple
-        $('.pendamping').select2();
-        data = [];
-        data = <?php echo json_encode($pendamping_ids); ?>;
-        $('.pendamping').val(data);
-        $('.pendamping').trigger('change');
-
         $('.select1').select2({
             placeholder: "--- Pilih ---",
             allowClear: true
         });
+
+        $('.select').select2();
 
         $('#myDatepicker2').datetimepicker({
             format: 'DD MMM YYYY'

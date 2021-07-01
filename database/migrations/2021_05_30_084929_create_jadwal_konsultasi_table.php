@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDaftarKonsultasiTable extends Migration
+class CreateJadwalKonsultasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDaftarKonsultasiTable extends Migration
      */
     public function up()
     {
-        Schema::create('daftar_konsultasi', function (Blueprint $table) {
+        Schema::create('jadwal_konsultasi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tgl_konsultasi');
             $table->string('problema');
@@ -34,6 +34,6 @@ class CreateDaftarKonsultasiTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daftar_konsultasi');
+        Schema::dropIfExists('jadwal_konsultasi');
     }
 }

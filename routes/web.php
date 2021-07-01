@@ -4,16 +4,15 @@ use App\Http\Controllers\AktivitasAnakController;
 use App\Http\Controllers\AktivitasBalitaController;
 use App\Http\Controllers\AktivitasBatitaController;
 use App\Http\Controllers\AnakController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DaftarKonsultasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTestingController;
 use App\Http\Controllers\DataTrainingController;
 use App\Http\Controllers\DiagnosaController;
+use App\Http\Controllers\JadwalKonsultasiController;
 use App\Http\Controllers\KonsultanController;
-use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PendampingController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\RiwayatKonsultasiController;
 use App\Http\Controllers\RiwayatPrediksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -38,12 +37,16 @@ Auth::routes();
 
 Route::get('/home', [DashboardController::class, 'index'])->name('home');
 Route::get('/', [DashboardController::class, 'index']);
+Route::get('export-riwayat-prediksi', [DashboardController::class, 'exportPDF'])->name('export-riwayat-prediksi');
 
 Route::resource('user', UserController::class);
 Route::delete('user-delete/{id}', [UserController::class, 'hapus'])->name('user-delete');
 
 Route::resource('anak', AnakController::class);
 Route::delete('anak-delete/{id}', [AnakController::class, 'hapus'])->name('anak-delete');
+Route::get('export-data-anak', [AnakController::class, 'exportPDF'])->name('export-data-anak');
+Route::get('export-anak-id/{id}', [AnakController::class, 'exportPDFId'])->name('export-anak-id');
+Route::get('export-excel', [AnakController::class, 'exportExcel'])->name('export-excel');
 
 Route::resource('diagnosa', DiagnosaController::class);
 Route::delete('diagnosa-delete/{id}', [DiagnosaController::class, 'hapus'])->name('diagnosa-delete');
@@ -54,8 +57,14 @@ Route::delete('pendamping-delete/{id}', [PendampingController::class, 'hapus'])-
 Route::resource('konsultan', KonsultanController::class);
 Route::delete('konsultan-delete/{id}', [KonsultanController::class, 'hapus'])->name('konsultan-delete');
 
-Route::resource('daftar-konsultasi', DaftarKonsultasiController::class);
-Route::delete('konsultasi-delete/{id}', [DaftarKonsultasiController::class, 'hapus'])->name('konsultasi-delete');
+Route::resource('jadwal-konsultasi', JadwalKonsultasiController::class);
+Route::get('export-konsultasi', [JadwalKonsultasiController::class, 'exportPDF'])->name('export-konsultasi');
+Route::get('export-konsultasi-id/{id}', [JadwalKonsultasiController::class, 'exportPDFId'])->name('export-konsultasi-id');
+Route::delete('konsultasi-delete/{id}', [JadwalKonsultasiController::class, 'hapus'])->name('konsultasi-delete');
+
+Route::resource('riwayat-konsultasi', RiwayatKonsultasiController::class);
+Route::get('export-riwayat-konsultasi', [RiwayatKonsultasiController::class, 'exportPDF'])->name('export-riwayat-konsultasi');
+Route::delete('riwayat-konsultasi-delete/{id}', [RiwayatKonsultasiController::class, 'hapus'])->name('riwayat-konsultasi-delete');
 
 Route::resource('riwayat-prediksi', RiwayatPrediksiController::class);
 

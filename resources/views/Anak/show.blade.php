@@ -18,13 +18,6 @@
                 <div class="x_content">
                     <br />
                     <table class="table table-stripped" width="100%">
-                        <!-- <tr>
-                            <td width="35%">Profil </td>
-                            <td width="1%"> : </td>
-                            <td>
-                                <img width="200" height="200" @if($datas->profil) src="{{ asset('images/anak/'.$datas->profil) }}" @endif />
-                            </td>
-                        </tr> -->
                         <tr>
                             <td width="35%">Nama Lengkap </td>
                             <td width="1%"> : </td>
@@ -38,12 +31,12 @@
                         <tr>
                             <td width="35%">Berat Badan</td>
                             <td width="1%"> : </td>
-                            <td>{{ $datas->berat_badan }}</td>
+                            <td>{{ $datas->berat_badan }} kg</td>
                         </tr>
                         <tr>
                             <td width="35%">Tinggi Badan</td>
                             <td width="1%"> : </td>
-                            <td>{{ $datas->tinggi_badan }}</td>
+                            <td>{{ $datas->tinggi_badan }} cm</td>
                         </tr>
                         <tr>
                             <td width="35%">Tanggal Lahir </td>

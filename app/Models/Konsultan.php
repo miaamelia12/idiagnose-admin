@@ -11,8 +11,8 @@ class Konsultan extends Model
     protected $table = "konsultan";
     protected $fillable = ['nama_konsultan', 'spesialis', 'rumah_sakit'];
 
-    public function daftar_konsultasi()
+    public function jadwal_konsultasi()
     {
-        return $this->hasMany(DaftarKonsultasi::class, 'konsultan_id');
+        return $this->hasMany(JadwalKonsultasi::class, 'konsultan_id');
     }
 }
