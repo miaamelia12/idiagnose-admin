@@ -23,7 +23,7 @@
         <div class="title_right">
             <div class="col-md-12 form-group row pull-right top_search">
                 <a href="{{route('anak.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 291px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
-                <a href="{{route('export-data-anak')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Export PDF</button></a>
+                <a href="{{route('export-data-anak')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Unduh</button></a>
             </div>
         </div>
     </div>
@@ -44,6 +44,7 @@
                                             <th>Nama</th>
                                             <th>Tgl Lahir</th>
                                             <th>Tgl Masuk YSI</th>
+                                            <th>IQ</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Pendidikan</th>
                                             <th>Action</th>
@@ -64,6 +65,9 @@
                                                 {{ date('d M Y', strtotime($data->tgl_masuk_ysi)) }}
                                             </td>
                                             <td>
+                                                {{ $data->IQ }}
+                                            </td>
+                                            <td>
                                                 {{ $data->jk }}
                                             </td>
                                             <td>
@@ -77,7 +81,7 @@
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="{{ route('anak.show', $data->id) }}">Detail</a>
                                                         <a class="dropdown-item" href="{{ route('anak.edit', $data->id) }}">Edit</a>
-                                                        <a class="dropdown-item" href="{{ route('export-anak-id', $data->id) }}">Export PDF</a>
+                                                        <a class="dropdown-item" href="{{ route('export-anak-id', $data->id) }}">Unduh</a>
                                                         <a class="dropdown-item deletebtn">Hapus</a>
                                                     </div>
                                                 </div>

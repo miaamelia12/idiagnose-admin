@@ -34,6 +34,7 @@
     @section('css')
 
     @show
+</head>
 
 <body class="nav-md">
     <div class="container body">

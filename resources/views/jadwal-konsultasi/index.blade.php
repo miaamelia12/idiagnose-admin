@@ -23,7 +23,7 @@
         <div class="title_right">
             <div class="col-md-12 form-group row pull-right top_search">
                 <a href="{{route('jadwal-konsultasi.create')}}"><button type="button" class="btn btn-primary" style="margin-left: 291px;"><i class="fa fa-plus"></i> Tambah Data</button></a>
-                <a href="{{route('export-konsultasi')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Export PDF</button></a>
+                <a href="{{route('export-konsultasi')}}"><button type="button" class="btn btn-dark"><i class="fa fa-download"></i> Unduh</button></a>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="{{route('jadwal-konsultasi.show', $data->id)}}">Detail</a>
                                                         <a class="dropdown-item" href="{{route('jadwal-konsultasi.edit', $data->id)}}">Edit</a>
-                                                        <a class="dropdown-item" href="{{ route('export-konsultasi-id', $data->id) }}">Export PDF</a>
+                                                        <a class="dropdown-item" href="{{ route('export-konsultasi-id', $data->id) }}">Unduh</a>
                                                         <a class="dropdown-item deletebtn">Hapus</a>
                                                     </div>
                                                 </div>

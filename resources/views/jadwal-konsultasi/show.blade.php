@@ -6,7 +6,7 @@
 <div class="">
     <div class="page-title">
         <div class="title_left">
-            <h3>Detail Konsultasi</h3>
+            <h3>Detail Jadwal Konsultasi</h3>
         </div>
     </div>
 
@@ -74,11 +74,11 @@
                             <td width="35%">Status </td>
                             <td width="1%"> : </td>
                             <td>
-                                @if($datas->status == "Selesai")
+                                <!-- @if($datas->status == "Selesai")
                                 <span class="badge badge-success">{{ $datas->status }}</span>
-                                @elseif($datas->status == "Menunggu")
+                                @elseif($datas->status == "Menunggu") -->
                                 <span class="badge badge-warning">{{ $datas->status }}</span>
-                                @endif
+                                <!-- @endif -->
                             </td>
                         </tr>
                     </table>

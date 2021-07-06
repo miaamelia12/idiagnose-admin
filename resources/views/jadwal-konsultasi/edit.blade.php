@@ -158,9 +158,9 @@
 $pendamping_ids = [];
 @endphp
 
-@foreach ($datas->pendamping as $pendamping_konsul)
+@foreach ($datas->pendamping as $pendampings)
 @php
-array_push($pendamping_ids, $pendamping_konsul->id);
+array_push($pendamping_ids, $pendampings->id);
 @endphp
 @endforeach
 

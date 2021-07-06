@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Laporan Daftar Konsultasi</title>
+    <title>Laporan Riwayat Konsultasi</title>
     <link href="{{asset('assets/template/vendors/style2.css')}}" rel="stylesheet">
     <!-- <link rel="stylesheet" href="style.css" media="all" /> -->
 </head>
@@ -13,7 +13,7 @@
         <div id="logo">
             <img src="{{ asset('assets/template/production/images/logo-ysi.jpeg') }}">
         </div>
-        <h1>Laporan Data Konsultasi</h1>
+        <h1>Laporan Riwayat Konsultasi</h1>
         <h3> Barito II No.55 Kebayoran Baru Jakarta Selatan 12130</h3>
         <h3> Email : admin@sayapibujakarta.org | Phone : 021-722 1763 | Fax : 021-722 1763</h3>
     </header>
@@ -102,7 +102,7 @@
         </div>
     </main>
     <footer>
-        Monika - Monitoring and Classification - Laporan Data Konsultasi.
+        Monika - Monitoring and Classification - Laporan Riwayat Konsultasi.
     </footer>
 </body>
 

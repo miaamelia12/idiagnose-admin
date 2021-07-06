@@ -22,7 +22,7 @@
         </div>
         <div class="title_right">
             <div class="col-md-12 form-group row pull-right top_search">
-                <a href="{{route('export-riwayat-konsultasi')}}"><button type="button" class="btn btn-dark" style="margin-left: 434px;"><i class="fa fa-download"></i> Export PDF</button></a>
+                <a href="{{route('export-riwayat-konsultasi')}}"><button type="button" class="btn btn-dark" style="margin-left: 434px;"><i class="fa fa-download"></i> Unduh</button></a>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="{{route('riwayat-konsultasi.show', $data->id)}}">Detail</a>
-                                                        <a class="dropdown-item" href="{{ route('export-konsultasi-id', $data->id) }}">Export PDF</a>
+                                                        <a class="dropdown-item" href="{{ route('export-riwayat-konsultasi-id', $data->id) }}">Unduh</a>
                                                         <a class="dropdown-item deletebtn">Hapus</a>
                                                     </div>
                                                 </div>

@@ -39,11 +39,7 @@ class AnakController extends Controller
 
     public function exportPDF()
     {
-        $all_data = DB::table('anak')
-            ->join('diagnosa_anak', 'anak.id', '=', 'diagnosa_anak.anak_id')
-            ->join('diagnosa', 'diagnosa.id', '=', 'diagnosa_anak.diagnosa_id')
-            ->select('diagnosa.nama_diagnosa', 'anak.nama', 'anak.usia', 'anak.berat_badan', 'anak.tinggi_badan', 'anak.jk', 'anak.tgl_lahir')
-            ->get();
+        $all_data = Anak::all();
 
         $pdf = \PDF::loadView(
             'anak.pdf-anak',

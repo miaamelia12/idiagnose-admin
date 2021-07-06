@@ -51,9 +51,16 @@ class JadwalKonsultasiController extends Controller
         $all_data = DB::table('jadwal_konsultasi')
             ->join('anak', 'anak.id', '=', 'jadwal_konsultasi.anak_id')
             ->join('konsultan', 'konsultan.id', '=', 'jadwal_konsultasi.konsultan_id')
-            ->join('pendamping_konsultasi', 'jadwal_konsultasi.id', '=', 'pendamping_konsultasi.konsultasi_id')
-            ->join('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
-            ->select('anak.nama', 'konsultan.nama_konsultan', 'konsultan.spesialis', 'konsultan.rumah_sakit', 'pendamping.nama_pendamping', 'jadwal_konsultasi.problema', 'jadwal_konsultasi.analisis_ahli', 'jadwal_konsultasi.status', 'jadwal_konsultasi.tgl_konsultasi')
+            ->select(
+                'anak.nama',
+                'konsultan.nama_konsultan',
+                'konsultan.spesialis',
+                'konsultan.rumah_sakit',
+                'jadwal_konsultasi.problema',
+                'jadwal_konsultasi.analisis_ahli',
+                'jadwal_konsultasi.status',
+                'jadwal_konsultasi.tgl_konsultasi'
+            )
             ->where('jadwal_konsultasi.status', 'menunggu')
             ->get();
 
@@ -69,13 +76,34 @@ class JadwalKonsultasiController extends Controller
     public function exportPDFId($id)
     {
         $all_data = DB::table('jadwal_konsultasi')
-            ->join('anak', 'anak.id', '=', 'jadwal_konsultasi.anak_id')
+            ->leftJoin('anak', 'anak.id', '=', 'jadwal_konsultasi.anak_id')
             ->join('konsultan', 'konsultan.id', '=', 'jadwal_konsultasi.konsultan_id')
-            ->join('pendamping_konsultasi', 'jadwal_konsultasi.id', '=', 'pendamping_konsultasi.konsultasi_id')
-            ->join('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
-            ->select('anak.nama', 'konsultan.nama_konsultan', 'konsultan.spesialis', 'konsultan.rumah_sakit', 'pendamping.nama_pendamping', 'jadwal_konsultasi.problema', 'jadwal_konsultasi.analisis_ahli', 'jadwal_konsultasi.status', 'jadwal_konsultasi.tgl_konsultasi')
+            ->select(
+                'anak.nama',
+                'anak.usia',
+                'anak.berat_badan',
+                'anak.tinggi_badan',
+                'anak.tgl_lahir',
+                'konsultan.nama_konsultan',
+                'konsultan.spesialis',
+                'konsultan.rumah_sakit',
+                'jadwal_konsultasi.problema',
+                'jadwal_konsultasi.analisis_ahli',
+                'jadwal_konsultasi.status',
+                'jadwal_konsultasi.tgl_konsultasi'
+            )
             ->where('jadwal_konsultasi.id', $id)
             ->first();
+
+        $pendamping = DB::table('pendamping_konsultasi')
+            ->join('pendamping', 'pendamping.id', '=', 'pendamping_konsultasi.pendamping_id')
+            ->where('pendamping_konsultasi.konsultasi_id', $id)
+            ->get();
+        $simpan_pendamping = '';
+        for ($i = 0; $i < count($pendamping); $i++) {
+            $simpan_pendamping .= $pendamping[$i]->nama_pendamping . ', ';
+        }
+        $all_data->nama_pendamping = $simpan_pendamping;
 
         $pdf = \PDF::loadView(
             'jadwal-konsultasi.pdf-id',
@@ -151,6 +179,16 @@ class JadwalKonsultasiController extends Controller
         $datas = JadwalKonsultasi::findOrFail($id);
         $anak = Anak::all();
         $konsultan = Konsultan::all();
+        if (count($datas->pendamping) == 0) {
+            $get = DB::table('pendamping_konsultasi')->where('konsultasi_id', $datas->id)->get();
+            $pendamping = [];
+            for ($i = 0; $i < count($get); $i++) {
+                $get_pendamping = DB::table('pendamping')->where('id', $get[$i]->pendamping_id)->first();
+                array_push($pendamping, $get_pendamping);
+            }
+
+            $datas->pendamping = $pendamping;
+        }
         $pendamping = Pendamping::all();
 
         return view('jadwal-konsultasi.edit', compact('datas', 'anak', 'konsultan', 'pendamping'));
@@ -163,7 +201,6 @@ class JadwalKonsultasiController extends Controller
             'tgl_konsultasi' => 'required|date',
             'problema' => 'required|string|max:255',
             'konsultan_id' => 'required',
-            'pendamping' => 'required',
         ]);
 
         $tgl_konsultasi = $request->get('tgl_konsultasi');

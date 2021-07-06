@@ -64,6 +64,7 @@ Route::delete('konsultasi-delete/{id}', [JadwalKonsultasiController::class, 'hap
 
 Route::resource('riwayat-konsultasi', RiwayatKonsultasiController::class);
 Route::get('export-riwayat-konsultasi', [RiwayatKonsultasiController::class, 'exportPDF'])->name('export-riwayat-konsultasi');
+Route::get('export-riwayat-konsultasi-id/{id}', [RiwayatKonsultasiController::class, 'exportPDFId'])->name('export-riwayat-konsultasi-id');
 Route::delete('riwayat-konsultasi-delete/{id}', [RiwayatKonsultasiController::class, 'hapus'])->name('riwayat-konsultasi-delete');
 
 Route::resource('riwayat-prediksi', RiwayatPrediksiController::class);
